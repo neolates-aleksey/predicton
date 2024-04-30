@@ -1,0 +1,27 @@
+@import "./variables.scss";
+
+body {
+  background-color: $color-secondary;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+p {
+  color: $color-white;
+}
+
+.container {
+  max-width: $page-max-width;
+  padding: 0 $page-side-space-md;
+  margin: 0 auto;
+}

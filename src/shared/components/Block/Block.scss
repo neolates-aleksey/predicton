@@ -1,0 +1,56 @@
+@import "../../styles/variables.scss";
+
+.block {
+  background-color: $color-primary;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 300px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__body {
+    margin: 12px 0;
+  }
+
+  &__up,
+  &__down {
+    padding: 6px 0;
+    text-align: center;
+    max-width: 80%;
+    margin: 0 auto;
+    cursor: pointer;
+  }
+
+  &__up {
+    background-color: $color-green;
+    border-radius: 6px 6px 0 0;
+  }
+
+  &__down {
+    background-color: $color-red;
+    border-radius: 0 0 6px 6px;
+  }
+
+  &__locked {
+    border: 1px solid $color-white;
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  &__current-price {
+    font-size: 24px;
+    font-weight: bold;
+
+    &_red {
+      color: $color-red;
+    }
+
+    &_green {
+      color: $color-green;
+    }
+  }
+}
