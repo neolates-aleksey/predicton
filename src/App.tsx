@@ -3,9 +3,9 @@ import "./shared/styles/index.scss";
 
 function App() {
   return (
-    <>
+    <div className="container">
       <BlocksGrid />
-    </>
+    </div>
   );
 }
 

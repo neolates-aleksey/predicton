@@ -1,10 +1,35 @@
 @import "../../styles/variables.scss";
 
 .block {
-  background-color: $color-primary;
-  border-radius: 12px;
+  background-color: #eceaee;
   padding: 20px;
-  max-width: 300px;
+  width: 100%;
+  height: 400px;
+  position: relative;
+
+  &:before {
+    position: absolute;
+    content: "";
+    bottom: -15px;
+    left: 8px;
+    right: 0px;
+    width: 100%;
+    height: 15px;
+    background-color: #8b8b8b;
+    transform: skew(45deg);
+  }
+  &:after {
+    position: absolute;
+    content: "";
+    top: 8px;
+    right: -15px;
+    bottom: 0;
+    height: 100%;
+    width: 15px;
+
+    background-color: #a7a7a7;
+    transform: skewY(45deg);
+  }
 
   &__header {
     display: flex;
@@ -36,7 +61,7 @@
   }
 
   &__locked {
-    border: 1px solid $color-white;
+    border: 1px solid $color-black;
     border-radius: 8px;
     padding: 10px;
   }

@@ -1,0 +1,23 @@
+@import "../../styles/variables.scss";
+
+.button {
+  display: block;
+  padding: 10px 14px;
+  background-color: $color-primary;
+  max-width: 300px;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+
+  &_green {
+    background-color: $color-green;
+  }
+
+  &_red {
+    background-color: $color-red;
+  }
+
+  &_disabled {
+    cursor: not-allowed;
+  }
+}
