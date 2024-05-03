@@ -1,81 +1,29 @@
 @import "../../styles/variables.scss";
 
 .block {
-  background-color: #eceaee;
-  padding: 20px;
-  width: 100%;
-  height: 400px;
-  position: relative;
-
-  &:before {
-    position: absolute;
-    content: "";
-    bottom: -15px;
-    left: 8px;
-    right: 0px;
-    width: 100%;
-    height: 15px;
-    background-color: #8b8b8b;
-    transform: skew(45deg);
-  }
-  &:after {
-    position: absolute;
-    content: "";
-    top: 8px;
-    right: -15px;
-    bottom: 0;
-    height: 100%;
-    width: 15px;
-
-    background-color: #a7a7a7;
-    transform: skewY(45deg);
-  }
-
-  &__header {
+  &__body {
+    background-color: $color-dark-light;
+    padding: 24px;
+    width: 364px;
+    height: 413px;
+    border-radius: 20px;
+    position: relative;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: space-between;
   }
 
-  &__body {
-    margin: 12px 0;
+  &__info {
+    padding-top: 16px;
+    height: 133px;
+    border-top: 1px solid #444a60;
   }
 
-  &__up,
-  &__down {
-    padding: 6px 0;
-    text-align: center;
-    max-width: 80%;
-    margin: 0 auto;
-    cursor: pointer;
-  }
-
-  &__up {
-    background-color: $color-green;
-    border-radius: 6px 6px 0 0;
-  }
-
-  &__down {
-    background-color: $color-red;
-    border-radius: 0 0 6px 6px;
-  }
-
-  &__locked {
-    border: 1px solid $color-black;
-    border-radius: 8px;
-    padding: 10px;
-  }
-
-  &__current-price {
-    font-size: 24px;
-    font-weight: bold;
-
-    &_red {
-      color: $color-red;
-    }
-
-    &_green {
-      color: $color-green;
-    }
+  &__graphs {
+    height: 100%;
+    padding-bottom: 32px;
   }
 }

@@ -1,0 +1,69 @@
+@import "../../../styles/variables.scss";
+
+.block-graphs {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  height: 100%;
+
+  &__item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+  }
+
+  &__item-bets {
+    border-radius: 8px;
+    padding: 12px 14px;
+    min-height: 60px;
+    transition: height 0.25s ease-in;
+    display: flex;
+    align-items: center;
+
+    &_up {
+      background-color: $color-green;
+    }
+
+    &_down {
+      background-color: $color-red;
+    }
+  }
+
+  &__bet-info_up p {
+    color: $color-black;
+  }
+
+  &__bet-arrow {
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+  }
+  &__bet-sum {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 20px;
+  }
+  &__bet-count {
+    font-size: 12px;
+    line-height: 16px;
+    text-transform: uppercase;
+  }
+
+  &__item-payout {
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  &__rate {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  &__payout {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+  }
+}

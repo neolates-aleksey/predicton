@@ -1,12 +1,22 @@
 import { useEffect, useState } from "react";
 import Block, { IBlock } from "../../shared/components/Block/Block";
 import { mockedBlocks } from "../../shared/consts/mockData";
+import { socket } from "../../api/ws";
 
 const CurrentBlock = () => {
   const [blockInfo, setBlockInfo] = useState<IBlock | null>(null);
 
   useEffect(() => {
-    setBlockInfo(mockedBlocks[0]);
+    // setBlockInfo(mockedBlocks[0]);
+
+    socket.onmessage = function (event) {
+      console.log(JSON.parse(event.data));
+
+      let currentBlock: any = [];
+      JSON.parse(event.data).forEach((item: any) => currentBlock.push(item));
+
+      setBlockInfo(currentBlock[0]);
+    };
   }, []);
 
   return (

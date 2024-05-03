@@ -30,7 +30,7 @@ export const mockedBlocks: IBlock[] = [
     coin: "TON",
     up_bet_sum: 9,
     down_bet_sum: 1.7,
-    current_up_rate: 1.4,
-    current_down_rate: 2.2,
+    current_up_rate: 3,
+    current_down_rate: 1.1,
   },
 ];

@@ -1,7 +1,7 @@
 @import "./variables.scss";
 
 body {
-  background-color: $color-secondary;
+  background-color: $color-deep-dark;
 }
 
 * {
@@ -17,7 +17,7 @@ h5,
 h6,
 span,
 p {
-  color: $color-black;
+  color: $color-white;
 }
 
 .container {

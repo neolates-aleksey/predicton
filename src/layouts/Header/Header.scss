@@ -1,0 +1,13 @@
+@import "../../shared/styles/variables.scss";
+
+.header {
+  width: 100%;
+  border-bottom: 2px solid $color-dark;
+  padding: 10px 0;
+
+  &__body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
