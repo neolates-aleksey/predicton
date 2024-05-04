@@ -1,0 +1,15 @@
+@import "../../../styles/variables.scss";
+
+.block-bet {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: calc(100% - 24px);
+  background-color: $color-dark;
+  border: 1px solid $color-border;
+  border-radius: 20px;
+  padding: 20px 24px;
+  box-sizing: border-box;
+}
