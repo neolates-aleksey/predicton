@@ -1,7 +1,69 @@
+@import "../../../styles/variables.scss";
+
 .block-info {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 20px;
   grid-row-gap: 16px;
+  align-items: center;
+
+  &__title {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18px;
+    color: $color-gray;
+    margin-bottom: 2px;
+
+    svg {
+      margin-right: 6px;
+    }
+  }
+
+  &__text {
+    color: $color-white;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 600;
+
+    &_small {
+      font-size: 17px;
+    }
+  }
+
+  &__change {
+    padding: 6px 12px;
+    border-radius: 8px;
+    background-color: $color-gray;
+
+    &_up {
+      background-color: $color-green;
+    }
+
+    &_down {
+      background-color: $color-red;
+    }
+  }
+
+  &__change-title {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18px;
+    color: $color-black;
+
+    &_white {
+      color: $color-white;
+    }
+  }
+
+  &__change-text {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    color: $color-black;
+
+    &_white {
+      color: $color-white;
+    }
+  }
 }

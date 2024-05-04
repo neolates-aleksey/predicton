@@ -1,9 +1,8 @@
 import classNames from "classnames";
-import BetForm from "../../../components/BetForm/BetForm";
-import "./Block.scss";
 import BlockGraphs from "./BlockGraphs/BlockGraphs";
 import BlockHeader from "./BlockHeader/BlockHeader";
 import BlockInfo from "./BlockInfo/BlockInfo";
+import "./Block.scss";
 
 export enum BlockState {
   "on_bet",
@@ -46,12 +45,27 @@ const Block = ({
     <div className="block">
       <BlockHeader state={state} />
 
-      <div className="block__body">
+      <div
+        className={classNames("block__body", {
+          block__body_red: locked_price < current_price,
+          block__body_up: locked_price > current_price,
+        })}
+      >
         <div className="block__graphs">
-          <BlockGraphs up_sum={up_bet_sum} down_sum={down_bet_sum} up_rate={current_up_rate} down_rate={current_down_rate} />
+          <BlockGraphs
+            up_sum={up_bet_sum}
+            down_sum={down_bet_sum}
+            up_rate={current_up_rate}
+            down_rate={current_down_rate}
+          />
         </div>
         <div className="block__info">
-          <BlockInfo />
+          <BlockInfo
+            last_price={current_price}
+            locked_price={locked_price}
+            prize_pool={up_bet_sum + down_bet_sum}
+            change={locked_price - current_price}
+          />
         </div>
       </div>
     </div>
