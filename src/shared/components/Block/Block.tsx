@@ -2,11 +2,12 @@ import classNames from "classnames";
 import BlockGraphs from "./BlockGraphs/BlockGraphs";
 import BlockHeader from "./BlockHeader/BlockHeader";
 import BlockInfo from "./BlockInfo/BlockInfo";
-import "./Block.scss";
 import IconArrowDown from "../../icons/IconArrowDown";
 import IconArrowUp from "../../icons/IconArrowUp";
 import { useState } from "react";
 import BlockBet from "./BlockBet/BlockBet";
+import useDelayUnmount from "../../helpers/useDelayUnmount";
+import "./Block.scss";
 
 export enum BlockState {
   "on_bet",
@@ -45,12 +46,19 @@ const Block = ({
   up_bet_sum,
   down_bet_sum,
 }: IBlock) => {
-  const [controlOpen, setControlOpen] = useState<boolean | "UP" | "DOWN">(
-    false
-  );
+  const [controlOpen, setControlOpen] = useState<false | "UP" | "DOWN">(false);
 
-  const onBetClickHandler = (side: "UP" | "DOWN") => {
+  const [isMounted, setIsMounted] = useState(false);
+  const shouldRenderChild = useDelayUnmount(isMounted, 200);
+
+  const onBetOpen = (side: "UP" | "DOWN") => {
+    setIsMounted(true);
     setControlOpen(side);
+  };
+
+  const onBetClose = () => {
+    setIsMounted(false);
+    setControlOpen(false);
   };
 
   return (
@@ -78,14 +86,14 @@ const Block = ({
 
               <div className="block__prediction-buttons">
                 <div
-                  onClick={() => onBetClickHandler("UP")}
+                  onClick={() => onBetOpen("DOWN")}
                   className="block__prediction-button block__prediction-button_red"
                 >
                   <IconArrowUp />
                   DOWN
                 </div>
                 <div
-                  onClick={() => onBetClickHandler("DOWN")}
+                  onClick={() => onBetOpen("UP")}
                   className="block__prediction-button block__prediction-button_green"
                 >
                   <IconArrowDown />
@@ -103,7 +111,15 @@ const Block = ({
           )}
         </div>
 
-        {controlOpen && <BlockBet />}
+        {shouldRenderChild && (
+          <BlockBet
+            className={classNames(
+              isMounted ? "mountedStyle" : "unmountedStyle"
+            )}
+            side={controlOpen}
+            closeHandler={onBetClose}
+          />
+        )}
       </div>
     </div>
   );

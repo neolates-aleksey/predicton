@@ -6,10 +6,41 @@
   left: 0;
   right: 0;
   width: 100%;
-  height: calc(100% - 24px);
   background-color: $color-dark;
   border: 1px solid $color-border;
   border-radius: 20px;
   padding: 20px 24px;
   box-sizing: border-box;
+
+  &__title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+  }
+
+  &__title-side {
+    &_green {
+      color: $color-green;
+    }
+
+    &_red {
+      color: $color-red;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+  }
+
+  &__close-btn {
+    cursor: pointer;
+
+    &:hover {
+      path {
+        fill: #e0dfdf;
+      }
+    }
+  }
 }

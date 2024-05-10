@@ -78,3 +78,23 @@
     }
   }
 }
+
+.mountedStyle {
+  // max-height: calc(100% - 24px);
+  // overflow: hidden;
+  height: calc(100% - 24px);
+  transition: all 0.2s ease-in-out;
+
+  opacity: 1;
+  // transition: opacity 200ms ease-in;
+}
+
+.unmountedStyle {
+  // overflow: hidden;
+  height: 0;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+
+  // opacity: 0;
+  // transition: opacity 200ms ease-in;
+}
