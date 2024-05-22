@@ -1,29 +1,62 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./PercentTabs.scss";
 import classNames from "classnames";
 
 interface IPercentTabs {
   balance: number;
+  onTabChange: any;
 }
 
-const PercentTabs = ({ balance }: IPercentTabs) => {
-  const [activeTab, setActiveTab] = useState<Number | null>(null);
+const PercentTabs = ({ balance, onTabChange }: IPercentTabs) => {
+  const [percent, setPercent] = useState<Number | null>(null);
+
+  useEffect(() => {
+    if (percent) {
+      console.log("final value: ", (percent * balance) / 100);
+      onTabChange((percent * balance) / 100);
+    }
+  }, [percent]);
 
   return (
     <div className="percent-tabs">
-      <div onClick={() => setActiveTab(10)} className={classNames("percent-tabs__item", { "percent-tabs__item_active": activeTab === 10 })}>
+      <div
+        onClick={() => setPercent(10)}
+        className={classNames("percent-tabs__item", {
+          "percent-tabs__item_active": percent === 10,
+        })}
+      >
         10%
       </div>
-      <div onClick={() => setActiveTab(25)} className={classNames("percent-tabs__item", { "percent-tabs__item_active": activeTab === 25 })}>
+      <div
+        onClick={() => setPercent(25)}
+        className={classNames("percent-tabs__item", {
+          "percent-tabs__item_active": percent === 25,
+        })}
+      >
         25%
       </div>
-      <div onClick={() => setActiveTab(50)} className={classNames("percent-tabs__item", { "percent-tabs__item_active": activeTab === 50 })}>
+      <div
+        onClick={() => setPercent(50)}
+        className={classNames("percent-tabs__item", {
+          "percent-tabs__item_active": percent === 50,
+        })}
+      >
         50%
       </div>
-      <div onClick={() => setActiveTab(75)} className={classNames("percent-tabs__item", { "percent-tabs__item_active": activeTab === 75 })}>
+      <div
+        onClick={() => setPercent(75)}
+        className={classNames("percent-tabs__item", {
+          "percent-tabs__item_active": percent === 75,
+        })}
+      >
         75%
       </div>
-      <div onClick={() => setActiveTab(100)} className={classNames("percent-tabs__item", { "percent-tabs__item_active": activeTab === 100 })}>
+      <div
+        onClick={() => setPercent(100)}
+        className={classNames("percent-tabs__item", {
+          "percent-tabs__item_active": percent === 100,
+        })}
+      >
         100%
       </div>
     </div>

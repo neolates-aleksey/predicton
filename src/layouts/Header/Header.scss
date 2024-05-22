@@ -2,8 +2,9 @@
 
 .header {
   width: 100%;
-  border-bottom: 2px solid $color-dark;
-  padding: 10px 0;
+  border-bottom: 1px solid $color-border;
+  padding: 20px 0;
+  background-color: $color-dark-light;
 
   &__body {
     display: flex;
