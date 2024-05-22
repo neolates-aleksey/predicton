@@ -1,14 +1,19 @@
 import classNames from "classnames";
 import IconClose from "../../../icons/IconClose";
 import "./BlockBet.scss";
+import PercentTabs from "../../PercentTabs/PercentTabs";
+import { useState } from "react";
 
 interface IBlockBet {
   closeHandler: () => void;
-  side: "UP" | "DOWN";
+  side: false | "UP" | "DOWN";
   className: string;
 }
 
 const BlockBet = ({ closeHandler, side, className }: IBlockBet) => {
+  const [balance, setBalance] = useState<number>(2);
+  const [betValue, setBetValue] = useState<number>(0);
+
   return (
     <div className={classNames("block-bet", className)}>
       <div className="block-bet__header">
@@ -28,7 +33,11 @@ const BlockBet = ({ closeHandler, side, className }: IBlockBet) => {
           <IconClose className="block-bet__close-btn" />
         </div>
       </div>
-      <div className="block-bet__content"></div>
+      <div className="block-bet__content">
+        <input value={betValue} placeholder="min 0.5 USDT" className="block-bet__input" type="text" />
+
+        <PercentTabs />
+      </div>
     </div>
   );
 };

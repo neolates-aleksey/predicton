@@ -43,4 +43,15 @@
       }
     }
   }
+
+  &__input {
+    border: 1px solid #434a60;
+    background-color: $color-dark-light;
+    padding: 16px;
+    border-radius: 8px;
+    width: 100%;
+    margin-top: 16px;
+    box-sizing: border-box;
+    color: $color-white;
+  }
 }

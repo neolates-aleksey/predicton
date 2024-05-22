@@ -75,5 +75,12 @@
       background-color: $color-blue;
       color: $color-white;
     }
+
+    &_expired {
+      border: 3px solid #bababa;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+    }
   }
 }

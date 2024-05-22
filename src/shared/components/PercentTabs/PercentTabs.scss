@@ -1,0 +1,28 @@
+@import "../../styles/variables.scss";
+
+.percent-tabs {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  &__item {
+    cursor: pointer;
+    padding: 7px 7px;
+    border-radius: 8px;
+    color: $color-white;
+    background-color: $color-dark-light;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #374c5f;
+    }
+
+    &_active {
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      border: 2px solid $color-blue;
+    }
+  }
+}

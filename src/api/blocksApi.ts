@@ -15,17 +15,12 @@ async function getNextBlock() {
   return await api.get(`/blocks/next`, {});
 }
 
-async function getLatestBlocks({ count }: IGetLatestsBlocks) {
-  return await api.get(`/blocks/${count}`, {});
-}
-
-async function getAllLatestBlocks() {
-  return await api.get(`/blocks/latest`, {});
+async function getLatestBlocks(num: number) {
+  return await api.get(`/blocks/latest?num=${num}`, {});
 }
 
 export const blocksApi = {
   getCurrentBlock,
   getNextBlock,
   getLatestBlocks,
-  getAllLatestBlocks,
 };

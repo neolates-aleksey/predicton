@@ -4,6 +4,7 @@ import BlocksGrid from "./modules/BlocksGrid/BlocksGrid";
 import "./shared/styles/index.scss";
 import { useState, useEffect } from "react";
 import { socket } from "./api/ws";
+import { RecoilRoot } from "recoil";
 
 function App() {
   // useEffect(() => {
@@ -11,17 +12,18 @@ function App() {
 
   //   socket.onmessage = function (event) {
   //     console.log(JSON.parse(event.data));
-
   //   };
   // }, []);
 
   return (
     <>
       <TonConnectUIProvider manifestUrl="http://localhost:5173/tonconnect-manifest.json">
-        <Header />
-        <div className="container">
+        <RecoilRoot>
+          <Header />
+          {/* <div className="container"> */}
           <BlocksGrid />
-        </div>
+          {/* </div> */}
+        </RecoilRoot>
       </TonConnectUIProvider>
     </>
   );

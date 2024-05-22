@@ -18,8 +18,8 @@ export enum BlockState {
 export interface IBlock {
   block_hash: string;
   previous_block_hash: string;
-  block_started_at: Date;
-  block_will_end_at: Date;
+  bet_started_at: Date;
+  bet_will_end_at: Date;
   locked_at?: Date;
   will_end_at?: Date;
   state: "on_bet" | "locked" | "ended";
@@ -35,8 +35,8 @@ export interface IBlock {
 const Block = ({
   block_hash,
   previous_block_hash,
-  block_started_at,
-  block_will_end_at,
+  bet_started_at,
+  bet_will_end_at,
   locked_at,
   state,
   current_price,
@@ -62,22 +62,17 @@ const Block = ({
   };
 
   return (
-    <div className="block">
-      <BlockHeader state={state} />
+    <div className={classNames("block", { block_ended: state === "ended" })}>
+      <BlockHeader state={state} end_time={bet_will_end_at} />
 
       <div
         className={classNames("block__body", {
           block__body_red: locked_price < current_price,
-          block__body_up: locked_price > current_price,
+          block__body_green: locked_price > current_price,
         })}
       >
         <div className="block__graphs">
-          <BlockGraphs
-            up_sum={up_bet_sum}
-            down_sum={down_bet_sum}
-            up_rate={current_up_rate}
-            down_rate={current_down_rate}
-          />
+          <BlockGraphs up_sum={up_bet_sum} down_sum={down_bet_sum} up_rate={current_up_rate} down_rate={current_down_rate} />
         </div>
         <div className="block__info">
           {state === "on_bet" ? (
@@ -85,17 +80,11 @@ const Block = ({
               <p className="block__prediction-title">Make Your Prediction</p>
 
               <div className="block__prediction-buttons">
-                <div
-                  onClick={() => onBetOpen("DOWN")}
-                  className="block__prediction-button block__prediction-button_red"
-                >
+                <div onClick={() => onBetOpen("DOWN")} className="block__prediction-button block__prediction-button_red">
                   <IconArrowUp />
                   DOWN
                 </div>
-                <div
-                  onClick={() => onBetOpen("UP")}
-                  className="block__prediction-button block__prediction-button_green"
-                >
+                <div onClick={() => onBetOpen("UP")} className="block__prediction-button block__prediction-button_green">
                   <IconArrowDown />
                   UP
                 </div>
@@ -112,13 +101,7 @@ const Block = ({
         </div>
 
         {shouldRenderChild && (
-          <BlockBet
-            className={classNames(
-              isMounted ? "mountedStyle" : "unmountedStyle"
-            )}
-            side={controlOpen}
-            closeHandler={onBetClose}
-          />
+          <BlockBet className={classNames(isMounted ? "mountedStyle" : "unmountedStyle")} side={controlOpen} closeHandler={onBetClose} />
         )}
       </div>
     </div>

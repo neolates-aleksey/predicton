@@ -1,6 +1,12 @@
 @import "../../styles/variables.scss";
 
 .block {
+  max-width: 365px;
+
+  &_ended {
+    opacity: 0.5;
+  }
+
   &__body {
     background-color: $color-dark-light;
     padding: 24px;

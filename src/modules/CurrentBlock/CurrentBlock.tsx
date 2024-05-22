@@ -2,22 +2,17 @@ import { useEffect, useState } from "react";
 import Block, { IBlock } from "../../shared/components/Block/Block";
 import { mockedBlocks } from "../../shared/consts/mockData";
 import { socket } from "../../api/ws";
+import { useRecoilState } from "recoil";
+import { blocksState } from "../../store/blocks";
 
 const CurrentBlock = () => {
   const [blockInfo, setBlockInfo] = useState<IBlock | null>(null);
+  const [blocksData, setBlocksData] = useRecoilState(blocksState);
 
   useEffect(() => {
-    // setBlockInfo(mockedBlocks[0]);
-
-    socket.onmessage = function (event) {
-      console.log(JSON.parse(event.data));
-
-      let currentBlock: any = [];
-      JSON.parse(event.data).forEach((item: any) => currentBlock.push(item));
-
-      setBlockInfo(currentBlock[0]);
-    };
-  }, []);
+    console.log(blocksData);
+    blocksData && setBlockInfo(blocksData.current);
+  }, [blocksData]);
 
   return (
     <>
@@ -26,8 +21,8 @@ const CurrentBlock = () => {
           key={blockInfo.block_hash}
           block_hash={blockInfo.block_hash}
           previous_block_hash={blockInfo.previous_block_hash}
-          block_started_at={blockInfo.block_started_at}
-          block_will_end_at={blockInfo.block_will_end_at}
+          bet_started_at={blockInfo.bet_started_at}
+          bet_will_end_at={blockInfo.bet_will_end_at}
           will_end_at={blockInfo.will_end_at}
           locked_at={blockInfo.locked_at}
           state={blockInfo.state}
