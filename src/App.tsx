@@ -5,6 +5,7 @@ import "./shared/styles/index.scss";
 import { useState, useEffect } from "react";
 import { socket } from "./api/ws";
 import { RecoilRoot } from "recoil";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   // useEffect(() => {
@@ -18,12 +19,14 @@ function App() {
   return (
     <>
       <TonConnectUIProvider manifestUrl="http://localhost:5173/tonconnect-manifest.json">
-        <RecoilRoot>
-          <Header />
-          {/* <div className="container"> */}
-          <BlocksGrid />
-          {/* </div> */}
-        </RecoilRoot>
+        <BrowserRouter>
+          <RecoilRoot>
+            <Header />
+            <Routes>
+              <Route path="/" element={<BlocksGrid />} />
+            </Routes>
+          </RecoilRoot>
+        </BrowserRouter>
       </TonConnectUIProvider>
     </>
   );

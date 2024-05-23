@@ -3,6 +3,36 @@ $tablet-width: 992px;
 $laptop-width: 1440px;
 $desktop-width: 1540px;
 
+@mixin media($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (max-width: $desktop-width) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media screen and (max-width: $laptop-width) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (max-width: $tablet-width) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media screen and (max-width: $mobile-width) {
+    @content;
+  }
+}
+
 $page-max-width: 1100px;
 $page-side-space-md: 32px;
 $page-side-space: 16px;

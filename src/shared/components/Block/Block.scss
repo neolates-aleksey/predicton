@@ -21,6 +21,10 @@
     flex-direction: column;
     justify-content: space-between;
 
+    @include mobile {
+      width: 100%;
+    }
+
     &_red {
       border: 3px solid $color-red;
     }

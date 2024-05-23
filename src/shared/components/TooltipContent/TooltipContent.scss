@@ -1,0 +1,35 @@
+@import "../../styles/variables.scss";
+
+.tooltip-content {
+  position: absolute;
+  top: 60px;
+  max-width: 150px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #444a60;
+  background-color: $color-deep-dark;
+
+  &__item {
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $color-white;
+    border-bottom: 1px solid #444a60;
+    transition: background-color 0.2s;
+    cursor: pointer;
+
+    &:first-child {
+      border-radius: 7px 7px 0 0;
+    }
+
+    &:last-child {
+      border-bottom: 0;
+      border-radius: 0 0 7px 7px;
+    }
+
+    &:hover {
+      background-color: #14354c;
+    }
+  }
+}
