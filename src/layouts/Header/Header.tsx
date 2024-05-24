@@ -1,9 +1,9 @@
-import { useEffect } from "react";
-import { TonConnectButton, useTonAddress, useTonWallet } from "@tonconnect/ui-react";
+import { TonConnectButton, useTonAddress } from "@tonconnect/ui-react";
 import IconLogo from "../../shared/icons/IconLogo";
 import MenuTooltip from "../../modules/MenuTooltip/MenuTooltip";
-import "./Header.scss";
 import { Link } from "react-router-dom";
+import "./Header.scss";
+import CurrencySwitch from "../../modules/CurrencySwitch/CurrencySwitch";
 
 const Header = () => {
   const userFriendlyAddress = useTonAddress();
@@ -15,6 +15,9 @@ const Header = () => {
           <Link to="/" className="header__logo">
             <IconLogo />
           </Link>
+          <div className="header__currency">
+            <CurrencySwitch />
+          </div>
           <div className="header__options">
             <div className="header__connect">
               {userFriendlyAddress ? (

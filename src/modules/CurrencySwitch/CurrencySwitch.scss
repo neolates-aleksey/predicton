@@ -1,0 +1,23 @@
+@import "../../shared/styles/variables.scss";
+
+.currency-switch {
+  display: flex;
+  align-items: center;
+
+  &__content {
+    margin-left: 10px;
+  }
+
+  &__name {
+    font-weight: 400;
+    font-size: 11px;
+    margin-bottom: 3px;
+    color: $color-gray;
+    line-height: 13px;
+  }
+  &__price {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+  }
+}

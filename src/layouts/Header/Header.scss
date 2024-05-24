@@ -28,6 +28,17 @@
     }
   }
 
+  &__currency {
+    padding: 0 22px;
+    background-color: $color-deep-dark;
+    border-right: 1px solid $color-border;
+    border-left: 1px solid $color-border;
+    border-bottom: 1px solid $color-deep-dark;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
   &__connect {
     display: flex;
     align-items: center;

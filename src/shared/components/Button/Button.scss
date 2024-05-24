@@ -9,6 +9,16 @@
   text-align: center;
   cursor: pointer;
 
+  &_primary {
+    border-radius: 8px;
+    background-color: $color-blue;
+    color: $color-white;
+    font-size: 17px;
+    font-weight: 600;
+    height: 45px;
+    box-sizing: border-box;
+  }
+
   &_green {
     background-color: $color-green;
   }
@@ -18,6 +28,31 @@
   }
 
   &_disabled {
-    cursor: not-allowed;
+    cursor: inherit;
+    background-color: #bababa;
+  }
+
+  &_loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__loader {
+    border: 2px solid #bababa;
+    border-top: 2px solid $color-white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 }

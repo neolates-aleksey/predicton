@@ -1,0 +1,53 @@
+@import "../../styles/variables.scss";
+
+.table {
+  width: 100%;
+  border: 1px solid $color-border;
+  border-radius: 8px;
+
+  &__header {
+    display: flex;
+    border-bottom: 1px solid $color-border;
+  }
+
+  &__header-item {
+    width: 100%;
+    padding: 16px;
+    border-right: 1px solid $color-border;
+    color: $color-white;
+    font-weight: 600;
+    font-size: 15px;
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+
+  &__body {
+    display: flex;
+  }
+
+  &__body-column {
+    width: 100%;
+    border-right: 1px solid $color-border;
+    background-color: $color-dark-light;
+    border-radius: 0 0 8px 8px;
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+
+  &__body-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid $color-border;
+
+    color: $color-white;
+    font-weight: 400;
+    font-size: 13px;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+}

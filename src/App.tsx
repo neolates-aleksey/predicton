@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { socket } from "./api/ws";
 import { RecoilRoot } from "recoil";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Points from "./pages/Points/Points";
 
 function App() {
   // useEffect(() => {
@@ -24,6 +25,7 @@ function App() {
             <Header />
             <Routes>
               <Route path="/" element={<BlocksGrid />} />
+              <Route path="/points" element={<Points />} />
             </Routes>
           </RecoilRoot>
         </BrowserRouter>

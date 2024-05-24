@@ -1,0 +1,49 @@
+@import "../../shared/styles/variables.scss";
+
+.points-main {
+  max-width: 461px;
+  width: 100%;
+
+  &__top {
+    display: flex;
+    max-height: 88px;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    padding: 20px 12px;
+    border: 1px solid $color-border;
+    border-radius: 8px;
+    margin-right: 8px;
+  }
+
+  &__stats {
+    border: 1px solid $color-border;
+    border-radius: 8px;
+    background-color: $color-dark-light;
+    padding: 16px 24px;
+    width: 100%;
+  }
+
+  &__stats-text {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 17px;
+    margin-bottom: 4px;
+    color: $color-gray;
+  }
+
+  &__stats-count {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 33px;
+  }
+
+  &__description {
+    margin: 24px 0;
+    font-size: 17px;
+    line-height: 24px;
+    font-weight: 400;
+  }
+}

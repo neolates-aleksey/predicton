@@ -1,0 +1,32 @@
+@import "../../shared/styles/variables.scss";
+
+.points-system {
+  &__block {
+    padding-bottom: 32px;
+    border-bottom: 1px solid $color-border;
+    padding-top: 32px;
+
+    &:first-child {
+      padding-top: 0;
+    }
+  }
+
+  &__title {
+    margin-bottom: 12px;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27px;
+  }
+
+  &__hint {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    color: $color-gray;
+  }
+
+  &__table {
+    margin-top: 16px;
+    margin-bottom: 12px;
+  }
+}

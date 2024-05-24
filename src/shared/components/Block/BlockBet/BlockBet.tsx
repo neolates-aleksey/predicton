@@ -14,10 +14,6 @@ const BlockBet = ({ closeHandler, side, className }: IBlockBet) => {
   const [balance, setBalance] = useState<number>(2);
   const [betValue, setBetValue] = useState<number>(0);
 
-  const onInputChange = (e: Event) => {
-    // setBetValue(e.target.value)
-  };
-
   return (
     <div className={classNames("block-bet", className)}>
       <div className="block-bet__header">
@@ -38,12 +34,7 @@ const BlockBet = ({ closeHandler, side, className }: IBlockBet) => {
         </div>
       </div>
       <div className="block-bet__content">
-        <input
-          value={betValue}
-          placeholder="min 0.5 USDT"
-          className="block-bet__input"
-          type="text"
-        />
+        <input value={betValue} placeholder="min 0.5 USDT" className="block-bet__input" type="text" />
 
         <PercentTabs onTabChange={setBetValue} balance={balance} />
       </div>
