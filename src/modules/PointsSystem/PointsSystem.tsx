@@ -1,5 +1,5 @@
 import Table from "../../shared/components/Table/Table";
-import { predictionPointsTable } from "../../shared/consts/tablesData";
+import { predictionPointsTable, referalPointsTable } from "../../shared/consts/tablesData";
 import IconCoin from "../../shared/icons/IconCoin";
 import "./PointsSystem.scss";
 
@@ -26,6 +26,7 @@ const PointsSystem = () => {
       <div className="points-system__block">
         <p className="points-system__title">Points from Frens</p>
         <p className="points-system__description">You can invite new users and get points for it. Just send them your referral link:</p>
+        <Table className="points-system__table" data={referalPointsTable} />
         <p className="points-system__description">
           If a person who follows the referral link wins, you get % of his winning and points. The percent and points can increase
         </p>

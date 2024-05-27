@@ -9,4 +9,21 @@ const predictionPointsTable = [
   },
 ];
 
-export { predictionPointsTable };
+const referalPointsTable = [
+  {
+    heading: "Your Frens",
+    items: ["1 – 10 users", "11 – 50 users", "51 – 100 users", "101 – 300 users", "300+ users"],
+  },
+  {
+    heading: "Your Profit",
+    items: [
+      "0.5% of winning + 5 points",
+      "0.6% of winning + 5 points",
+      "0.7% of winning + 5 points",
+      "0.8% of winning + 10 points",
+      "1.0% of winning + 10 points",
+    ],
+  },
+];
+
+export { predictionPointsTable, referalPointsTable };

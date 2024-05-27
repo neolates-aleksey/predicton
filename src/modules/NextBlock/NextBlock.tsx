@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
-import Block, { IBlock } from "../../shared/components/Block/Block";
-import { mockedBlocks } from "../../shared/consts/mockData";
-import { socket } from "../../api/ws";
 import { useRecoilState } from "recoil";
+import Block, { IBlock } from "../../shared/components/Block/Block";
 import { blocksState } from "../../store/blocks";
 
 const NextBlock = () => {
@@ -10,7 +8,6 @@ const NextBlock = () => {
   const [blocksData, setBlocksData] = useRecoilState(blocksState);
 
   useEffect(() => {
-    console.log(blocksData);
     blocksData && setBlockInfo(blocksData.next);
   }, [blocksData]);
 

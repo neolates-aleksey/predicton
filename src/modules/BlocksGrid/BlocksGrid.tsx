@@ -32,7 +32,6 @@ const BlocksGrid = () => {
     infinite: false,
     speed: 500,
     slidesToShow: 4,
-    focusOnSelect: true,
     className: "blocks-grid__slider",
     centerMode: true,
     initialSlide: 3,

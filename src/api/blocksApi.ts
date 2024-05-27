@@ -3,10 +3,6 @@ import { baseURL } from "../shared/consts/baseURL.ts";
 
 const api = axios.create({ baseURL: baseURL });
 
-interface IGetLatestsBlocks {
-  count: number;
-}
-
 async function getCurrentBlock() {
   return await api.get(`/blocks/current`, {});
 }
