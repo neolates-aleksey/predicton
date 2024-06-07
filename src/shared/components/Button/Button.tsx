@@ -10,10 +10,11 @@ interface IButton {
   isGreen?: boolean;
   isFullWidth?: boolean;
   isDisabled?: boolean;
+  isRounded?: boolean;
   onClick?: () => void | false;
 }
 
-const Button = ({ text, classname, isLoading, isPrimary, isRed, isGreen, isFullWidth, onClick, isDisabled }: IButton) => {
+const Button = ({ text, classname, isLoading, isPrimary, isRed, isGreen, isFullWidth, onClick, isDisabled, isRounded }: IButton) => {
   return (
     <div
       onClick={onClick}
@@ -21,8 +22,9 @@ const Button = ({ text, classname, isLoading, isPrimary, isRed, isGreen, isFullW
         button_primary: isPrimary,
         button_red: isRed,
         button_green: isGreen,
-        button_disabled: isLoading || isDisabled,
+        button_disabled: isDisabled,
         button_loading: isLoading,
+        button_rounded: isRounded,
         "button_full-width": isFullWidth,
       })}
     >

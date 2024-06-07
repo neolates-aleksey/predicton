@@ -1,6 +1,10 @@
+import Button from "../../shared/components/Button/Button";
+import RefLink from "../../shared/components/RefLink/RefLink";
 import Table from "../../shared/components/Table/Table";
 import { predictionPointsTable, referalPointsTable } from "../../shared/consts/tablesData";
 import IconCoin from "../../shared/icons/IconCoin";
+import IconPerson from "../../shared/icons/IconPerson";
+import Tasks from "../Tasks/Tasks";
 import "./PointsSystem.scss";
 
 const PointsSystem = () => {
@@ -19,17 +23,48 @@ const PointsSystem = () => {
         </p>
       </div>
       <div className="points-system__block">
-        <p className="points-system__title">Points for Tasks</p>
+        <p className="points-system__title">
+          <IconCoin /> Points for Tasks
+        </p>
         <p className="points-system__description">This displays active tasks for you. Complete them to earn more points!</p>
+        <Tasks />
         <p className="points-system__hint">Points for tasks may not come immediately, so it is worth waiting a little longer</p>
       </div>
       <div className="points-system__block">
-        <p className="points-system__title">Points from Frens</p>
+        <p className="points-system__title">
+          <IconCoin /> Points from Frens
+        </p>
         <p className="points-system__description">You can invite new users and get points for it. Just send them your referral link:</p>
-        <Table className="points-system__table" data={referalPointsTable} />
+        <RefLink link="predicton.xyz/ref/mLu52cmDv" />
         <p className="points-system__description">
           If a person who follows the referral link wins, you get % of his winning and points. The percent and points can increase
         </p>
+        <Table className="points-system__table" data={referalPointsTable} />
+        <div className="points-system__ref">
+          <div className="points-system__friends">
+            <p className="points-system__friends-title">My Frens</p>
+
+            <div className="points-system__friends-number">
+              <IconPerson />
+
+              <p className="points-system__friends-count">0</p>
+            </div>
+          </div>
+          <div className="points-system__earnings">
+            <p className="points-system__earnings-description">Total Earnings from Frens</p>
+            <div className="points-system__earnings-content">
+              <div className="points-system__earnings-block">
+                <p className="points-system__earnings-text">0</p>
+                <p className="points-system__earnings-description">USDT</p>
+              </div>
+              <div className="points-system__earnings-block">
+                <p className="points-system__earnings-text">0</p>
+                <p className="points-system__earnings-description">points</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <Button isPrimary isFullWidth text="Transfer earnings" />
       </div>
     </div>
   );

@@ -4,6 +4,10 @@
   max-width: 461px;
   width: 100%;
 
+  @include tablet {
+    margin-bottom: 40px;
+  }
+
   &__top {
     display: flex;
     max-height: 88px;

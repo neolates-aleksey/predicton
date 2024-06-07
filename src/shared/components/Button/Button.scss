@@ -8,6 +8,7 @@
   width: 100%;
   text-align: center;
   cursor: pointer;
+  transition: background-color 0.2s;
 
   &_primary {
     border-radius: 8px;
@@ -17,6 +18,10 @@
     font-weight: 600;
     height: 45px;
     box-sizing: border-box;
+
+    &:hover {
+      background-color: #007acc;
+    }
   }
 
   &_green {
@@ -30,6 +35,11 @@
   &_disabled {
     cursor: inherit;
     background-color: #bababa;
+    color: $color-deep-dark;
+
+    &:hover {
+      background-color: #bababa;
+    }
   }
 
   &_loading {
@@ -38,13 +48,27 @@
     justify-content: center;
   }
 
+  &_rounded {
+    font-size: 13px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    height: 30px;
+    padding: 5px 14px;
+  }
+
+  &_full-width {
+    max-width: 100%;
+    width: 100%;
+  }
+
   &__loader {
-    border: 2px solid #bababa;
+    // border: 2px solid #bababa;
+    border: 2px solid $color-blue;
     border-top: 2px solid $color-white;
     border-radius: 50%;
     width: 18px;
     height: 18px;
-    animation: spin 1s linear infinite;
+    animation: spin 0.7s linear infinite;
   }
 
   @keyframes spin {

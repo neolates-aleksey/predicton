@@ -1,0 +1,62 @@
+@import "../../../shared/styles/variables.scss";
+
+.task {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 8px;
+  transition: 0.3s background-color;
+
+  &:hover {
+    background-color: $color-dark;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+  }
+  &__icon {
+    background-color: $color-dark-light;
+    border-radius: 8px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+
+    &_green {
+      background-color: $color-dark-green;
+    }
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 24px;
+    margin-bottom: 2px;
+  }
+
+  &__reward {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18px;
+    color: $color-gray;
+
+    &_green {
+      color: $color-success;
+    }
+  }
+
+  &__action {
+    display: flex;
+    align-items: center;
+  }
+}

@@ -36,7 +36,7 @@ const PointsMain = () => {
         isDisabled={timeLeft !== 0}
         isLoading={buttonLoading}
         isPrimary
-        text={timeLeft ? "Next bonus: N hours" : "Daily Bonus (+15 points)"}
+        text={timeLeft ? "Next bonus: 23h 59m" : "Daily Bonus (+15 points)"}
       />
     </div>
   );

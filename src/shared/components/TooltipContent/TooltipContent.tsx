@@ -17,12 +17,10 @@ const TooltipContent = ({ items, onClose }: ITooltipContent) => {
     <div className="tooltip-content">
       {items ? (
         items.map((item: ITooltipItem) => (
-          <>
-            <Link to={item.link} onClick={onClose} className="tooltip-content__item">
-              <p>{item.text}</p>
-              {item.icon}
-            </Link>
-          </>
+          <Link key={item.text} to={item.link} onClick={onClose} className="tooltip-content__item">
+            <p>{item.text}</p>
+            {item.icon}
+          </Link>
         ))
       ) : (
         <h1>error</h1>

@@ -1,0 +1,58 @@
+@import "../../shared/styles/variables.scss";
+
+.mobile-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: $color-dark-light;
+  border-top: 1px solid $color-border;
+  display: none;
+  padding: 8px 0;
+
+  @include mobile {
+    display: block;
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  &__link {
+    text-align: center;
+    padding: 0 10px;
+
+    &_active {
+      .mobile-nav__link-svg {
+        svg {
+          fill: red;
+        }
+
+        path {
+          fill: $color-white;
+        }
+      }
+
+      .mobile-nav__link-title {
+        color: $color-white;
+      }
+    }
+  }
+
+  &__link-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: $color-gray;
+  }
+
+  &__link-svg {
+    height: 21px;
+    width: 100%;
+
+    path {
+      fill: $color-gray;
+    }
+  }
+}

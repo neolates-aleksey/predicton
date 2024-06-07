@@ -5,6 +5,7 @@ import Header from "./layouts/Header/Header";
 import BlocksGrid from "./modules/BlocksGrid/BlocksGrid";
 import Points from "./pages/Points/Points";
 import "./shared/styles/index.scss";
+import MobileNav from "./layouts/MobileNav/MobileNav";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <BrowserRouter>
           <RecoilRoot>
             <Header />
+            <MobileNav />
             <Routes>
               <Route path="/" element={<BlocksGrid />} />
               <Route path="/points" element={<Points />} />

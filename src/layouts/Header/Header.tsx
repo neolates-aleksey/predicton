@@ -2,8 +2,8 @@ import { TonConnectButton, useTonAddress } from "@tonconnect/ui-react";
 import IconLogo from "../../shared/icons/IconLogo";
 import MenuTooltip from "../../modules/MenuTooltip/MenuTooltip";
 import { Link } from "react-router-dom";
-import "./Header.scss";
 import CurrencySwitch from "../../modules/CurrencySwitch/CurrencySwitch";
+import "./Header.scss";
 
 const Header = () => {
   const userFriendlyAddress = useTonAddress();

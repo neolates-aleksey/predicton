@@ -29,4 +29,71 @@
     margin-top: 16px;
     margin-bottom: 12px;
   }
+
+  &__ref {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  &__friends {
+    background-color: $color-dark-light;
+    border: 1px solid $color-border;
+    border-radius: 8px;
+    padding: 8px 12px;
+    max-width: 120px;
+    width: 120px;
+    margin-right: 8px;
+  }
+
+  &__friends-title {
+    margin-bottom: 6px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    color: $color-gray;
+  }
+
+  &__friends-number {
+    display: flex;
+    align-items: center;
+  }
+
+  &__friends-count {
+    margin-left: 4px;
+    font-weight: 600;
+    font-size: 17px;
+  }
+
+  &__earnings {
+    background-color: $color-dark-light;
+    border: 1px solid $color-border;
+    border-radius: 8px;
+    width: 100%;
+    padding: 8px 12px;
+  }
+
+  &__earnings-content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+  }
+
+  &__earnings-block {
+    display: flex;
+    align-items: baseline;
+    width: 50%;
+  }
+
+  &__earnings-text {
+    font-weight: 600;
+    font-size: 17px;
+    margin-right: 4px;
+  }
+
+  &__earnings-description {
+    font-size: 13px;
+    line-height: 18px;
+    color: $color-gray;
+  }
 }

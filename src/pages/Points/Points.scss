@@ -1,8 +1,24 @@
+@import "../../shared/styles/variables.scss";
+
 .points {
   margin-top: 48px;
+
+  @include tablet {
+    margin-top: 24px;
+  }
+
+  @include mobile {
+    margin-top: 0;
+    padding-top: 24px;
+  }
 
   &__content {
     display: flex;
     gap: 56px;
+
+    @include tablet {
+      display: block;
+      gap: 0;
+    }
   }
 }

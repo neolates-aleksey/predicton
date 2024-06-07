@@ -7,6 +7,10 @@
   background-color: $color-dark-light;
   height: 72px;
 
+  @include mobile {
+    display: none;
+  }
+
   &__container {
     height: 100%;
   }
@@ -25,6 +29,10 @@
 
     svg {
       display: block;
+
+      @include tablet {
+        width: 170px;
+      }
     }
   }
 
@@ -37,6 +45,10 @@
     height: 100%;
     display: flex;
     align-items: center;
+
+    @include tablet {
+      display: none;
+    }
   }
 
   &__connect {
