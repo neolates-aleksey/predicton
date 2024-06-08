@@ -22,6 +22,12 @@
     &:hover {
       background-color: #007acc;
     }
+
+    @include mobile {
+      border-radius: 6px;
+      padding: 12px 14px;
+      height: 48px;
+    }
   }
 
   &_green {

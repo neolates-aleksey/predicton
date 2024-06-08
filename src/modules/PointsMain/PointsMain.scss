@@ -20,6 +20,10 @@
     border: 1px solid $color-border;
     border-radius: 8px;
     margin-right: 8px;
+
+    @include mobile {
+      padding: 12px 14px;
+    }
   }
 
   &__stats {
@@ -28,6 +32,10 @@
     background-color: $color-dark-light;
     padding: 16px 24px;
     width: 100%;
+
+    @include mobile {
+      padding: 14px 16px;
+    }
   }
 
   &__stats-text {
@@ -36,12 +44,22 @@
     line-height: 17px;
     margin-bottom: 4px;
     color: $color-gray;
+
+    @include mobile {
+      font-size: 11px;
+      line-height: 13px;
+    }
   }
 
   &__stats-count {
     font-size: 28px;
     font-weight: 600;
     line-height: 33px;
+
+    @include mobile {
+      font-size: 22px;
+      line-height: 27px;
+    }
   }
 
   &__description {
@@ -49,5 +67,15 @@
     font-size: 17px;
     line-height: 24px;
     font-weight: 400;
+
+    @include mobile {
+      font-size: 15px;
+      line-height: 20px;
+      margin: 16px 0;
+    }
+  }
+
+  &__button {
+    max-width: 100%;
   }
 }

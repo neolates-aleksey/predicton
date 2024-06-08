@@ -2,9 +2,12 @@
 
 .points-system {
   &__block {
-    padding-bottom: 32px;
     border-bottom: 1px solid $color-border;
-    padding-top: 32px;
+    padding: 32px 0;
+
+    @include mobile {
+      padding: 20px 0;
+    }
 
     &:first-child {
       padding-top: 0;
@@ -16,6 +19,24 @@
     font-weight: 400;
     font-size: 20px;
     line-height: 27px;
+
+    @include mobile {
+      font-size: 16px;
+      line-height: 22px;
+      display: flex;
+      align-items: center;
+
+      svg {
+        margin-right: 6px;
+      }
+    }
+  }
+
+  &__description {
+    @include mobile {
+      font-size: 13px;
+      line-height: 18px;
+    }
   }
 
   &__hint {
@@ -28,6 +49,11 @@
   &__table {
     margin-top: 16px;
     margin-bottom: 12px;
+
+    @include mobile {
+      margin-top: 16px;
+      margin-bottom: 8px;
+    }
   }
 
   &__ref {
@@ -44,6 +70,10 @@
     max-width: 120px;
     width: 120px;
     margin-right: 8px;
+
+    @include mobile {
+      border-radius: 6px;
+    }
   }
 
   &__friends-title {
@@ -52,17 +82,32 @@
     font-size: 13px;
     line-height: 18px;
     color: $color-gray;
+
+    @include mobile {
+      font-size: 11px;
+      line-height: 13px;
+    }
   }
 
   &__friends-number {
     display: flex;
     align-items: center;
+
+    @include mobile {
+      svg {
+        width: 12px;
+      }
+    }
   }
 
   &__friends-count {
     margin-left: 4px;
     font-weight: 600;
     font-size: 17px;
+
+    @include mobile {
+      font-size: 15px;
+    }
   }
 
   &__earnings {
@@ -71,6 +116,10 @@
     border-radius: 8px;
     width: 100%;
     padding: 8px 12px;
+
+    @include mobile {
+      border-radius: 6px;
+    }
   }
 
   &__earnings-content {
@@ -89,11 +138,20 @@
     font-weight: 600;
     font-size: 17px;
     margin-right: 4px;
+
+    @include mobile {
+      font-size: 15px;
+    }
   }
 
   &__earnings-description {
     font-size: 13px;
     line-height: 18px;
     color: $color-gray;
+
+    @include mobile {
+      font-size: 11px;
+      line-height: 13px;
+    }
   }
 }

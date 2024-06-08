@@ -1,0 +1,23 @@
+@import "../../../shared/styles/variables.scss";
+
+.desktop-balance {
+  background-color: $color-dark-light;
+  border-radius: 12px;
+  padding: 16px;
+  max-width: 364px;
+  border: 1px solid $color-border;
+  text-align: center;
+
+  &__title {
+    font-size: 16px;
+    line-height: 21px;
+    color: $color-gray;
+    margin-bottom: 6px;
+  }
+
+  &__count {
+    font-size: 34px;
+    line-height: 40px;
+    font-weight: 600;
+  }
+}

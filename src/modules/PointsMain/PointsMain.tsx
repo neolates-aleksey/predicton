@@ -29,9 +29,11 @@ const PointsMain = () => {
         </div>
       </div>
       <p className="points-main__description">
-        You can get these points for active participation on the Predicton — participate in predictions, complete tasks and challenges, invite frens
+        You can get these points for active participation on the Predicton —
+        participate in predictions, complete tasks and challenges, invite frens
       </p>
       <Button
+        classname="points-main__button"
         onClick={timeLeft === 0 ? onClaimHandler : () => ""}
         isDisabled={timeLeft !== 0}
         isLoading={buttonLoading}

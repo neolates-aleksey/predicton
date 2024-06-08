@@ -26,6 +26,10 @@ p {
   width: 100%;
   padding: 0 $page-side-space-md;
   margin: 0 auto;
+
+  @include mobile {
+    padding: 0 16px;
+  }
 }
 
 .slick-slide {

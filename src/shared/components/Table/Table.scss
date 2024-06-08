@@ -2,21 +2,26 @@
 
 .table {
   width: 100%;
-  border: 1px solid $color-border;
+  border: 0.5px solid $color-border;
   border-radius: 8px;
 
   &__header {
     display: flex;
-    border-bottom: 1px solid $color-border;
+    border-bottom: 0.5px solid $color-border;
   }
 
   &__header-item {
     width: 100%;
     padding: 16px;
-    border-right: 1px solid $color-border;
+    border-right: 0.5px solid $color-border;
     color: $color-white;
     font-weight: 600;
     font-size: 15px;
+
+    @include mobile {
+      padding: 12px;
+      font-size: 13px;
+    }
 
     &:last-child {
       border-right: 0;
@@ -29,22 +34,32 @@
 
   &__body-column {
     width: 100%;
-    border-right: 1px solid $color-border;
+    border-right: 0.5px solid $color-border;
     background-color: $color-dark-light;
     border-radius: 0 0 8px 8px;
 
     &:last-child {
       border-right: 0;
+      border-radius: 0 0 8px;
+    }
+
+    &:first-child {
+      border-radius: 0 0 0 8px;
     }
   }
 
   &__body-item {
     padding: 12px 16px;
-    border-bottom: 1px solid $color-border;
-
+    border-bottom: 0.5px solid $color-border;
     color: $color-white;
     font-weight: 400;
     font-size: 13px;
+
+    @include mobile {
+      font-size: 12px;
+      line-height: 16px;
+      padding: 10px 12px;
+    }
 
     &:last-child {
       border-bottom: 0;

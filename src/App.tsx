@@ -6,6 +6,7 @@ import BlocksGrid from "./modules/BlocksGrid/BlocksGrid";
 import Points from "./pages/Points/Points";
 import "./shared/styles/index.scss";
 import MobileNav from "./layouts/MobileNav/MobileNav";
+import Account from "./pages/Account/Account";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Routes>
               <Route path="/" element={<BlocksGrid />} />
               <Route path="/points" element={<Points />} />
+              <Route path="/account" element={<Account />} />
             </Routes>
           </RecoilRoot>
         </BrowserRouter>

@@ -1,14 +1,14 @@
 @import "../../../shared/styles/variables.scss";
 
 .task {
-  margin-bottom: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-radius: 8px;
   cursor: pointer;
-  padding: 8px;
+  padding: 6px;
   transition: 0.3s background-color;
+  margin: 0 -6px;
 
   &:hover {
     background-color: $color-dark;
@@ -22,6 +22,7 @@
     display: flex;
     align-items: center;
   }
+
   &__icon {
     background-color: $color-dark-light;
     border-radius: 8px;
@@ -31,6 +32,16 @@
     align-items: center;
     justify-content: center;
     margin-right: 20px;
+
+    @include mobile {
+      margin-right: 12px;
+      width: 40px;
+      height: 40px;
+
+      svg {
+        width: 20px;
+      }
+    }
 
     &_green {
       background-color: $color-dark-green;
@@ -42,6 +53,11 @@
     font-size: 17px;
     line-height: 24px;
     margin-bottom: 2px;
+
+    @include mobile {
+      font-size: 15px;
+      line-height: 20px;
+    }
   }
 
   &__reward {
@@ -49,6 +65,11 @@
     font-weight: 400;
     line-height: 18px;
     color: $color-gray;
+
+    @include mobile {
+      font-size: 11px;
+      line-height: 13px;
+    }
 
     &_green {
       color: $color-success;
@@ -58,5 +79,9 @@
   &__action {
     display: flex;
     align-items: center;
+
+    svg {
+      height: 16px;
+    }
   }
 }

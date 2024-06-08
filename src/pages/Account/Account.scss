@@ -1,0 +1,9 @@
+@import "../../shared/styles/variables.scss";
+
+.account {
+  margin-top: 48px;
+
+  @include tablet {
+    margin-top: 24px;
+  }
+}
