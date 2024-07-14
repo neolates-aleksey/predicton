@@ -16,6 +16,7 @@ const NextBlock = () => {
       {blockInfo && (
         <Block
           key={blockInfo.block_hash}
+          block_num={blockInfo.block_num}
           block_hash={blockInfo.block_hash}
           previous_block_hash={blockInfo.previous_block_hash}
           bet_started_at={blockInfo.bet_started_at}

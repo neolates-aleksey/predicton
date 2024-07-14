@@ -1,0 +1,27 @@
+@import "../../shared/styles/variables.scss";
+
+.settings {
+}
+
+.settings-item {
+  border-bottom: 1px solid #434a60;
+  padding: 20px 0;
+  display: flex;
+
+  &__icon {
+    margin-top: 3px;
+    margin-right: 8px;
+  }
+
+  &__title {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 2px;
+  }
+
+  &__description {
+    font-size: 13px;
+    font-weight: 400;
+    color: $color-gray;
+  }
+}

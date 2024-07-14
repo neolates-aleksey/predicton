@@ -7,9 +7,10 @@ import IconFinish from "../../../icons/IconFinish";
 interface IBlockHeader {
   state: string;
   end_time: Date;
+  block_num?: number;
 }
 
-const BlockHeader = ({ state, end_time }: IBlockHeader) => {
+const BlockHeader = ({ state, end_time, block_num }: IBlockHeader) => {
   const [time, setTime] = useState(0);
 
   // useEffect(() => {
@@ -48,12 +49,13 @@ const BlockHeader = ({ state, end_time }: IBlockHeader) => {
         )}
         {state === "ended" && (
           <span className="block-header__status block-header__status_expired">
-            <IconFinish /> <span className="block-header__status-text">EXPIRED</span>
+            <IconFinish />{" "}
+            <span className="block-header__status-text">EXPIRED</span>
           </span>
         )}
       </div>
       <div className="block-header__right">
-        <span className="block-header__hash">#1</span>
+        <span className="block-header__hash">#{block_num && block_num}</span>
       </div>
     </div>
   );

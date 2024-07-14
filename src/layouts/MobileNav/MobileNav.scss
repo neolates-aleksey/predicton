@@ -8,7 +8,8 @@
   background-color: $color-dark-light;
   border-top: 1px solid $color-border;
   display: none;
-  padding: 8px 0;
+  padding-top: 16px;
+  padding-bottom: 24px;
 
   @include mobile {
     display: block;
@@ -26,10 +27,6 @@
 
     &_active {
       .mobile-nav__link-svg {
-        svg {
-          fill: red;
-        }
-
         path {
           fill: $color-white;
         }

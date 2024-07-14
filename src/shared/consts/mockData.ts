@@ -4,8 +4,8 @@ export const mockedBlocks: IBlock[] = [
   {
     block_hash: "2",
     previous_block_hash: "1",
-    block_started_at: new Date(),
-    block_will_end_at: new Date(),
+    bet_started_at: new Date(),
+    bet_will_end_at: new Date(),
     locked_at: new Date(),
     will_end_at: new Date(),
     state: "locked",
@@ -20,8 +20,8 @@ export const mockedBlocks: IBlock[] = [
   {
     block_hash: "3",
     previous_block_hash: "2",
-    block_started_at: new Date(),
-    block_will_end_at: new Date(),
+    bet_started_at: new Date(),
+    bet_will_end_at: new Date(),
     locked_at: new Date(),
     will_end_at: new Date(),
     state: "on_bet",

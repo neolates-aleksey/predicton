@@ -7,6 +7,8 @@
   width: 18px;
   height: 18px;
   animation: spin 0.7s linear infinite;
+  z-index: 1;
+  position: relative;
 
   @keyframes spin {
     0% {

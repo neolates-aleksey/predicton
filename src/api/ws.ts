@@ -1,3 +1,3 @@
-const URL = "ws://213.178.155.230/api/latest/blocks/ws";
+const URL = "ws://194.87.74.112/api/latest/blocks/ws";
 
 export let socket = new WebSocket(URL);
