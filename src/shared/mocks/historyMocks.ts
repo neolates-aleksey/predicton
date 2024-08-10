@@ -8,7 +8,7 @@ export const predictionsMock: IPrediction[] = [
     coef: 2,
     bet_amount: 20,
     result_amount: 40,
-    date: new Date(0),
+    date: "8:51 PM, 05/16/2024",
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ export const predictionsMock: IPrediction[] = [
     coef: 1.6,
     bet_amount: 100,
     result_amount: 160,
-    date: new Date(0),
+    date: "8:51 PM, 05/16/2024",
   },
   {
     id: 10,
@@ -26,7 +26,7 @@ export const predictionsMock: IPrediction[] = [
     coef: 1.8,
     bet_amount: 50,
     result_amount: -50,
-    date: new Date(0),
+    date: "8:51 PM, 05/16/2024",
   },
 ];
 

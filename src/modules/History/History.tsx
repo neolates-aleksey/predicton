@@ -6,6 +6,7 @@ import {
 } from "../../shared/mocks/historyMocks";
 import "./History.scss";
 import classNames from "classnames";
+import HistoryItem from "../../shared/components/HistoryItem/HistoryItem";
 
 interface HistoryProps {
   tab: TTabName;
@@ -18,7 +19,7 @@ export type IPrediction = {
   coef: number;
   bet_amount: number;
   result_amount: number;
-  date: Date;
+  date: string;
 };
 
 export type ITransaction = {
@@ -38,91 +39,129 @@ type PredictionFilter = {
   all: number;
   up: number;
   down: number;
-  fail: number;
-  pass: number;
+  win: number;
+  lose: number;
 };
 
-const Filter = ({ data }: { data: IPrediction[] | ITransaction[] }) => {
+const History = ({ tab }: HistoryProps) => {
+  const [historyList, setHistoryList] = useState<IPrediction[] | false>(
+    predictionsMock
+  );
+
+  const [filteredHistoryList, setFilteredHistoryList] = useState<
+    IPrediction[] | false
+  >(false);
+
   const [filters, setFilters] = useState<
     PredictionFilter | TransactionFilter | null
   >(null);
 
-  const [activeFilter, setActiveFilter] = useState<any>();
+  const [activeFilter, setActiveFilter] = useState<any>("all");
 
   useEffect(() => {
-    if ((data as IPrediction[])[0] && (data as IPrediction[])[0].side) {
-      const predictionData = data as IPrediction[];
+    if (
+      (historyList as IPrediction[])[0] &&
+      (historyList as IPrediction[])[0].side
+    ) {
+      const predictionData = historyList as IPrediction[];
       const predictionFilters: PredictionFilter = {
         all: predictionData.length,
         up: predictionData.filter((pred) => pred.side === "UP").length,
         down: predictionData.filter((pred) => pred.side === "DOWN").length,
-        fail: predictionData.filter((pred) => pred.result === "LOSE").length,
-        pass: predictionData.filter((pred) => pred.result === "WIN").length,
+        lose: predictionData.filter((pred) => pred.result === "LOSE").length,
+        win: predictionData.filter((pred) => pred.result === "WIN").length,
       };
       setFilters(predictionFilters);
-      setActiveFilter(predictionFilters.all);
-    } else if (
-      (data as ITransaction[])[0] &&
-      (data as ITransaction[])[0].type
-    ) {
-      const transactionData = data as ITransaction[];
-      const transactionFilters = {
-        all: transactionData.length,
-        deposit: transactionData.filter((trans) => trans.type === "DEPOSIT")
-          .length,
-        withdraw: transactionData.filter((trans) => trans.type === "WITHDRAW")
-          .length,
-      };
-      setFilters(transactionFilters);
-      setActiveFilter(transactionFilters.all);
+
+      // console.log(predictionFilters);
+
+      // setActiveFilter(predictionFilters.all);
     }
-  }, [data]);
+  }, []);
 
   const onFilterClick = (key: string) => {
     setActiveFilter(key);
   };
 
-  return (
-    <div className="filter">
-      {filters &&
-        Object.entries(filters).map(([key, value]) => (
-          <div
-            onClick={() => onFilterClick(key)}
-            className={classNames("filter__item", {
-              filter__item_active: activeFilter === key,
-            })}
-            key={key}
-          >
-            <p className="filter__item-text">
-              {key} <span className="filter__item-divider">{value}</span>
-            </p>
-          </div>
-        ))}
-    </div>
-  );
-};
+  function filterHistoryArray(initArray: IPrediction[]): any[] {
+    if (activeFilter === "all") return initArray;
 
-const History = ({ tab }: HistoryProps) => {
-  const [historyList, setHistoryList] = useState<
-    IPrediction[] | ITransaction[] | false
-  >(false);
+    return initArray.filter((o: any) =>
+      Object.keys(o).some((k) =>
+        o[k].toString().toLowerCase().includes(activeFilter)
+      )
+    );
+  }
+
+  useEffect(() => {
+    console.log(activeFilter);
+
+    if (activeFilter) {
+      const searchResults = historyList && filterHistoryArray(historyList);
+
+      searchResults && setFilteredHistoryList(searchResults);
+
+      console.log(searchResults);
+    }
+  }, [activeFilter]);
 
   useEffect(() => {
     // TODO: fetch с параметром на историю, пока что мок, пока что симуляция запроса
     // setTimeout(() => {
     tab === "predictions" && setHistoryList(predictionsMock);
-    tab === "transactions" && setHistoryList(transactionsMock);
+    // tab === "transactions" && setHistoryList(transactionsMock);
     // }, 2000);
   }, [tab]);
 
   return (
     <div className="history">
       <div className="history__tabs">
-        {historyList !== false && <Filter data={historyList} />}
-        <div className="history__tab">
-          <div className="history__tab-name">All</div>
-          <div className="history__tab-number">66</div>
+        {/* {historyList !== false && <Filter data={historyList} />} */}
+
+        <div className="filter">
+          {filters &&
+            Object.entries(filters).map(([key, value]) => (
+              <div
+                onClick={() => onFilterClick(key)}
+                className={classNames("filter__item", {
+                  filter__item_active: activeFilter === key,
+                })}
+                key={key}
+              >
+                <p className="filter__item-text">
+                  {key} <span className="filter__item-divider">{value}</span>
+                </p>
+              </div>
+            ))}
         </div>
+      </div>
+      <div className="history__list">
+        {filteredHistoryList
+          ? filteredHistoryList.map((item) => (
+              <HistoryItem
+                key={item.id}
+                id={item.id}
+                side={item.side}
+                result={item.result}
+                coef={item.coef}
+                bet_amount={item.bet_amount}
+                result_amount={item.result_amount}
+                date={item.date}
+              />
+            ))
+          : historyList &&
+            historyList.map((item) => (
+              <HistoryItem
+                key={item.id}
+                id={item.id}
+                side={item.side}
+                result={item.result}
+                coef={item.coef}
+                bet_amount={item.bet_amount}
+                result_amount={item.result_amount}
+                date={item.date}
+              />
+            ))}
       </div>
     </div>
   );

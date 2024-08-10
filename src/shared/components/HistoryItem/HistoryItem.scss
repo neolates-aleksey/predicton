@@ -1,0 +1,70 @@
+@import "../../styles/variables.scss";
+@import "../../styles/texts.scss";
+
+.history-item {
+  padding: 12px 0;
+  border-bottom: 0.5px solid $color-border;
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__right {
+    text-align: right;
+  }
+
+  &__side {
+    @include font-generator("subheadline", 600);
+    margin-bottom: 2px;
+
+    &_green {
+      color: $color-green;
+    }
+
+    &_red {
+      color: $color-red;
+    }
+  }
+
+  &__amount {
+    @include font-generator("caption1", 600);
+    margin-bottom: 2px;
+  }
+
+  &__payout {
+    @include font-generator("caption1", 600);
+  }
+
+  &__info {
+    @include font-generator("caption1", 400, gray);
+  }
+
+  &__status {
+    @include font-generator("footnote", 600);
+  }
+
+  &__profit {
+    @include font-generator("caption1", 600);
+
+    &_green {
+      color: $color-success;
+    }
+
+    &_red {
+      color: $color-error;
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  &__date,
+  &__id {
+    @include font-generator("caption2", 400, gray);
+  }
+}

@@ -2,6 +2,8 @@
 
 .points {
   margin-top: 48px;
+  overflow-y: scroll;
+  max-height: 80vh;
 
   @include tablet {
     margin-top: 24px;

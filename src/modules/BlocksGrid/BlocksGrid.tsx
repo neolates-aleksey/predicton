@@ -8,25 +8,22 @@ import CurrentBlock from "../CurrentBlock/CurrentBlock";
 import NextBlock from "../NextBlock/NextBlock";
 import Block, { IBlock } from "../../shared/components/Block/Block";
 import "./BlocksGrid.scss";
+import { blocksMocks } from "../../shared/mocks/blocksMocks";
 
 const BlocksGrid = () => {
   const [blocksData, setBlocksData] = useRecoilState(blocksState);
   const [latestsBlocks, setLatestsBlocks] = useState<IBlock[]>();
 
   useEffect(() => {
-    blocksApi.getLatestBlocks(3).then((data) => {
-      console.log(data.data);
-
-      setLatestsBlocks(data.data);
-    });
-
-    socket.onmessage = function (event) {
-      const block = JSON.parse(event.data);
-
-      console.log(block);
-
-      setBlocksData(block);
-    };
+    // blocksApi.getLatestBlocks(3).then((data) => {
+    //   console.log(data.data);
+    //   setLatestsBlocks(data.data);
+    // });
+    // socket.onmessage = function (event) {
+    //   const block = JSON.parse(event.data);
+    //   console.log(block);
+    //   setBlocksData(block);
+    // };
   }, []);
 
   const settings = {
@@ -56,9 +53,9 @@ const BlocksGrid = () => {
 
   return (
     <div className="blocks-grid">
-      {latestsBlocks && (
+      {blocksMocks && (
         <Slider {...settings}>
-          {latestsBlocks
+          {blocksMocks
             .map((item: IBlock) => (
               <Block
                 key={item.block_hash}
@@ -80,8 +77,8 @@ const BlocksGrid = () => {
               />
             ))
             .reverse()}
-          <CurrentBlock />
-          <NextBlock />
+          {/* <CurrentBlock /> */}
+          {/* <NextBlock /> */}
         </Slider>
       )}
     </div>

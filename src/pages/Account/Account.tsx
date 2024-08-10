@@ -32,14 +32,6 @@ const Account = () => {
                 Predictions
               </div>
               <div
-                onClick={() => onTabClick("transactions")}
-                className={classNames("account__tab", {
-                  account__tab_active: currentTab === "transactions",
-                })}
-              >
-                Transactions
-              </div>
-              <div
                 onClick={() => onTabClick("settings")}
                 className={classNames("account__tab", {
                   account__tab_active: currentTab === "settings",

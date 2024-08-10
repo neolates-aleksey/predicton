@@ -1,6 +1,77 @@
 @import "../../shared/styles/variables.scss";
+@import "../../shared/styles/texts.scss";
 
 .history {
+  &__list {
+    margin-top: 16px;
+  }
+
+  &__item {
+    padding: 12px 0;
+    border-bottom: 0.5px solid $color-border;
+  }
+  &__item-content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__item-right {
+    text-align: right;
+  }
+
+  &__item-side {
+    @include font-generator("subheadline", 600);
+    margin-bottom: 2px;
+
+    &_green {
+      color: $color-green;
+    }
+
+    &_red {
+      color: $color-red;
+    }
+  }
+
+  &__item-amount {
+    @include font-generator("caption1", 600);
+    margin-bottom: 2px;
+  }
+
+  &__item-payout {
+    @include font-generator("caption1", 600);
+  }
+
+  &__item-info {
+    @include font-generator("caption1", 400, gray);
+  }
+
+  &__item-status {
+    @include font-generator("footnote", 600);
+  }
+
+  &__item-profit {
+    @include font-generator("caption1", 600);
+
+    &_green {
+      color: $color-success;
+    }
+
+    &_red {
+      color: $color-error;
+    }
+  }
+
+  &__item-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  &__item-date,
+  &__item-id {
+    @include font-generator("caption2", 400, gray);
+  }
 }
 
 .filter {

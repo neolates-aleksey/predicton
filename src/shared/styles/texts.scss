@@ -1,0 +1,37 @@
+@import "./variables.scss";
+
+@mixin color($color) {
+  @if $color ==white {
+    color: $color-white;
+  } @else if $color == gray {
+    color: $color-gray;
+  } @else if $color == green {
+    color: $color-dark-green;
+  } @else if $color == light-green {
+    color: $color-green;
+  } @else {
+    color: $color-white;
+  }
+}
+
+@mixin font-generator($name, $weight, $color: white) {
+  font-weight: $weight;
+
+  @if $name == "caption1" {
+    font-size: 12px;
+    line-height: 16px;
+  } @else if $name == "caption2" {
+    font-size: 11px;
+    line-height: 13px;
+  } @else if $name == "subheadline" {
+    font-size: 15px;
+    line-height: 20px;
+  } @else if $name == "footnote" {
+    font-size: 13px;
+    line-height: 18px;
+  } @else {
+    font-size: 14px;
+  }
+
+  @include color($color);
+}

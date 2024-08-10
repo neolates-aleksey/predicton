@@ -9,25 +9,20 @@ import MobileNav from "./layouts/MobileNav/MobileNav";
 import Account from "./pages/Account/Account";
 import { retrieveLaunchParams } from "@tma.js/sdk";
 import "./shared/styles/index.scss";
+import { postEvent } from "@telegram-apps/sdk";
 
 function App() {
-  const [first, setfirst] = useState<any>("");
-  // function api(url, data) {
-  //   let auth = "mock 1";
-  //   try {
-  //     const params = retrieveLaunchParams();
-  //     auth = "twa " + params.initDataRaw;
-  //   } catch (e) {
-  //     console.log("use mock");
-  //     auth = "mock 1";
-  //   }
-  //   return fetch(url, {...data, headers: {Authorization: auth, "Content-Type": "application/json"}})
-  // }
+  useEffect(() => {}, []);
 
   useEffect(() => {
     try {
       const params = retrieveLaunchParams();
-      setfirst(params.initDataRaw);
+      console.log(params);
+
+      params &&
+        postEvent("web_app_setup_swipe_behavior", {
+          allow_vertical_swipe: false,
+        });
     } catch (e) {
       console.log("use mock");
     }
