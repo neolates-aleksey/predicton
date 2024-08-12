@@ -6,6 +6,10 @@
   gap: 20px;
   height: 100%;
 
+  @include mobile {
+    gap: 8px;
+  }
+
   &__item {
     width: 100%;
     display: flex;
@@ -20,6 +24,7 @@
     transition: height 0.25s ease-in;
     display: flex;
     align-items: center;
+    box-sizing: border-box;
 
     &_up {
       background-color: $color-green;
@@ -39,11 +44,13 @@
     display: flex;
     align-items: center;
   }
+
   &__bet-sum {
     font-size: 15px;
     font-weight: 600;
     line-height: 20px;
   }
+
   &__bet-count {
     font-size: 12px;
     line-height: 16px;
@@ -59,11 +66,21 @@
     font-weight: 600;
     font-size: 20px;
     line-height: 24px;
+
+    @include mobile {
+      font-size: 16px;
+      line-height: 22px;
+    }
   }
 
   &__payout {
     font-weight: 400;
     font-size: 15px;
     line-height: 20px;
+
+    @include mobile {
+      font-size: 12px;
+      line-height: 16px;
+    }
   }
 }

@@ -10,6 +10,7 @@ import Account from "./pages/Account/Account";
 import { retrieveLaunchParams } from "@tma.js/sdk";
 import "./shared/styles/index.scss";
 import { postEvent } from "@telegram-apps/sdk";
+import Main from "./pages/Main/Main";
 
 function App() {
   useEffect(() => {}, []);
@@ -36,7 +37,7 @@ function App() {
             <Header />
             <MobileNav />
             <Routes>
-              <Route path="/" element={<BlocksGrid />} />
+              <Route path="/" element={<Main />} />
               <Route path="/points" element={<Points />} />
               <Route path="/account" element={<Account />} />
             </Routes>

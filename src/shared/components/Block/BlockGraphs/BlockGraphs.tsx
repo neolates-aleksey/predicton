@@ -39,7 +39,7 @@ const BlockGraphs = ({ up_sum, down_sum, up_rate, down_rate }: IBlockGraphs) => 
     <div className="block-graphs">
       <div className="block-graphs__item block-graphs__item_up">
         <div className="block-graphs__item-payout">
-          <p className="block-graphs__rate">{down_rate.toFixed(4)}x</p>
+          <p className="block-graphs__rate">{down_rate.toFixed(2)}x</p>
           <p className="block-graphs__payout">Payout</p>
         </div>
         <div style={{ height: `${downPercent}%` }} className="block-graphs__item-bets block-graphs__item-bets_down">
@@ -48,13 +48,13 @@ const BlockGraphs = ({ up_sum, down_sum, up_rate, down_rate }: IBlockGraphs) => 
           </div>
           <div className="block-graphs__bet-info">
             <p className="block-graphs__bet-sum">${down_sum}</p>
-            <p className="block-graphs__bet-count">12 users bet</p>
+            <p className="block-graphs__bet-count">12 users</p>
           </div>
         </div>
       </div>
       <div className="block-graphs__item block-graphs__item_down">
         <div className="block-graphs__item-payout">
-          <p className="block-graphs__rate">{up_rate.toFixed(4)}x</p>
+          <p className="block-graphs__rate">{up_rate.toFixed(2)}x</p>
           <p className="block-graphs__payout">Payout</p>
         </div>
         <div style={{ height: `${upPercent}%` }} className="block-graphs__item-bets block-graphs__item-bets_up">
@@ -63,7 +63,7 @@ const BlockGraphs = ({ up_sum, down_sum, up_rate, down_rate }: IBlockGraphs) => 
           </div>
           <div className="block-graphs__bet-info block-graphs__bet-info_up">
             <p className="block-graphs__bet-sum">${up_sum}</p>
-            <p className="block-graphs__bet-count">12 users bet</p>
+            <p className="block-graphs__bet-count">12 users</p>
           </div>
         </div>
       </div>
