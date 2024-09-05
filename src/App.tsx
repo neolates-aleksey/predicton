@@ -1,31 +1,32 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { RecoilRoot } from "recoil";
-import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Header from "./layouts/Header/Header";
-import BlocksGrid from "./modules/BlocksGrid/BlocksGrid";
-import Points from "./pages/Points/Points";
-import MobileNav from "./layouts/MobileNav/MobileNav";
-import Account from "./pages/Account/Account";
-import { retrieveLaunchParams } from "@tma.js/sdk";
-import "./shared/styles/index.scss";
+import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import { postEvent } from "@telegram-apps/sdk";
+import { retrieveLaunchParams } from "@tma.js/sdk";
+import WebApp from "@twa-dev/sdk";
+import Points from "./pages/Points/Points";
+import Account from "./pages/Account/Account";
 import Main from "./pages/Main/Main";
+import MobileNav from "./layouts/MobileNav/MobileNav";
+import Header from "./layouts/Header/Header";
+import Preloader from "./modules/Preloader/Preloader";
+import "./shared/styles/index.scss";
 
 function App() {
-  useEffect(() => {}, []);
-
   useEffect(() => {
     try {
       const params = retrieveLaunchParams();
-      console.log(params);
 
-      params &&
+      if (params) {
         postEvent("web_app_setup_swipe_behavior", {
           allow_vertical_swipe: false,
         });
+        postEvent("web_app_set_header_color", { color: "#18222E" });
+        WebApp.expand();
+      }
     } catch (e) {
-      console.log("use mock");
+      console.log("not twa");
     }
   }, []);
 
@@ -36,6 +37,7 @@ function App() {
           <RecoilRoot>
             <Header />
             <MobileNav />
+            <Preloader />
             <Routes>
               <Route path="/" element={<Main />} />
               <Route path="/points" element={<Points />} />

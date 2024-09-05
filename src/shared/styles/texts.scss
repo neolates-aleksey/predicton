@@ -29,6 +29,9 @@
   } @else if $name == "footnote" {
     font-size: 13px;
     line-height: 18px;
+  } @else if $name == "callout" {
+    font-size: 16px;
+    line-height: 21px;
   } @else {
     font-size: 14px;
   }

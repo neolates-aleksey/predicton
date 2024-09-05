@@ -11,7 +11,7 @@ interface IBlockBet {
 }
 
 const BlockBet = ({ closeHandler, side, className }: IBlockBet) => {
-  const [balance, setBalance] = useState<number>(2);
+  const [balance] = useState<number>(2);
   const [betValue, setBetValue] = useState<number>(0);
 
   return (
@@ -34,7 +34,12 @@ const BlockBet = ({ closeHandler, side, className }: IBlockBet) => {
         </div>
       </div>
       <div className="block-bet__content">
-        <input value={betValue} placeholder="min 0.5 USDT" className="block-bet__input" type="text" />
+        <input
+          value={betValue}
+          placeholder="min 0.5 USDT"
+          className="block-bet__input"
+          type="text"
+        />
 
         <PercentTabs onTabChange={setBetValue} balance={balance} />
       </div>
