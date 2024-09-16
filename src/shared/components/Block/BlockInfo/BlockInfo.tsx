@@ -43,7 +43,7 @@ const BlockInfo = ({ last_price, locked_price, prize_pool, change }: IBlockInfo)
           <IconLock />
           Locked price
         </p>
-        <p className="block-info__text block-info__text_small">{locked_price.toFixed(4)}</p>
+        <p className="block-info__text block-info__text_small">{locked_price && locked_price.toFixed(4)}</p>
       </div>
       <div className="block-info__item">
         <p className="block-info__title">

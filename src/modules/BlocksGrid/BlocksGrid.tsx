@@ -21,15 +21,15 @@ const BlocksGrid = () => {
   const [latestsBlocks, setLatestsBlocks] = useState<IBlock[]>();
 
   useEffect(() => {
-    // blocksApi.getLatestBlocks(3).then((data) => {
-    //   console.log(data.data);
-    //   setLatestsBlocks(data.data);
-    // });
-    // socket.onmessage = function (event) {
-    //   const block = JSON.parse(event.data);
-    //   console.log(block);
-    //   setBlocksData(block);
-    // };
+    blocksApi.getLatestBlocks(3, "point_block").then((res) => {
+      console.log(res.data);
+      setLatestsBlocks(res.data);
+    });
+    socket.onmessage = function (event) {
+      const block = JSON.parse(event.data);
+      console.log(block);
+      setBlocksData(block);
+    };
   }, []);
 
   const settings = {
@@ -63,8 +63,8 @@ const BlocksGrid = () => {
     <div className="blocks-grid">
       {blocksMocks && (
         <Slider {...settings}>
-          {blocksMocks &&
-            blocksMocks
+          {/* {latestsBlocks &&
+            latestsBlocks
               .map((item: IBlock) => (
                 <Block
                   key={item.block_hash}
@@ -85,9 +85,9 @@ const BlocksGrid = () => {
                   current_down_rate={item.current_down_rate}
                 />
               ))
-              .reverse()}
-          {/* <CurrentBlock />
-          <NextBlock /> */}
+              .reverse()} */}
+          {blocksData?.current && <CurrentBlock />}
+          <NextBlock />
         </Slider>
       )}
     </div>

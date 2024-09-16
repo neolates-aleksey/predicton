@@ -35,19 +35,14 @@ const BlockHeader = ({ state, end_time, block_num }: IBlockHeader) => {
             </span>
             <span className="block-header__timer">
               <IconClock />
-              <span className="block-header__status-text">
-                {formatTimeUntil(end_time)}
-              </span>
+              <span className="block-header__status-text">{formatTimeUntil(end_time)}</span>
             </span>
           </>
         )}
         {state === "on_bet" && (
           <span className="block-header__timer">
             <IconClock />
-            <span className="block-header__status-text">
-              {" "}
-              {formatTimeUntil(end_time)}
-            </span>
+            <span className="block-header__status-text"> {formatTimeUntil(end_time)}</span>
           </span>
           // <span className="block-header__status block-header__status-next">
           //   <IconPlay /> <span className="block-header__status-text">NEXT</span>
@@ -55,8 +50,7 @@ const BlockHeader = ({ state, end_time, block_num }: IBlockHeader) => {
         )}
         {state === "ended" && (
           <span className="block-header__status block-header__status_expired">
-            <IconFinish />{" "}
-            <span className="block-header__status-text">EXPIRED</span>
+            <IconFinish /> <span className="block-header__status-text">EXPIRED</span>
           </span>
         )}
       </div>

@@ -3,8 +3,11 @@ import BlocksGrid from "../../modules/BlocksGrid/BlocksGrid";
 import IconTonUsdt from "../../shared/icons/IconTonUsdt";
 import "./Main.scss";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { userState } from "../../store/userState";
 
 const Main = () => {
+  const [userInfo] = useRecoilState(userState);
   const [first, setfirst] = useState(6.5323);
 
   useEffect(() => {
@@ -22,11 +25,7 @@ const Main = () => {
             <div className="main__item-pair-content">
               <p className="main__item-title">TON/USDT</p>
               <p className="main__item-text">
-                <MotionNumber
-                  value={first}
-                  format={{ notation: "standard" }}
-                  locales="en-US"
-                />
+                <MotionNumber value={first} format={{ notation: "standard" }} locales="en-US" />
               </p>
             </div>
           </div>
@@ -34,7 +33,7 @@ const Main = () => {
         <div className="main__item">
           <div className="main__item-balance">
             <p className="main__item-title">Balance</p>
-            <p className="main__item-text">240 POINTS</p>
+            <p className="main__item-text">{userInfo?.user?.point_balance} POINTS</p>
           </div>
         </div>
       </div>
