@@ -1,0 +1,39 @@
+@import "../../styles/variables.scss";
+
+.range {
+  margin-top: 20px;
+  height: 12px;
+  width: 100%;
+  border-radius: 50px;
+  background-color: $color-dark-light;
+
+  &__bar {
+    position: relative;
+  }
+
+  &__filled {
+    background-color: $color-blue;
+    border-radius: 50px;
+    height: 12px;
+    width: 30%;
+  }
+
+  &__divider {
+    position: absolute;
+    height: 36px;
+    width: 3px;
+    border-radius: 50px;
+    background-color: $color-blue;
+    top: -12px;
+
+    &::before {
+      position: absolute;
+      content: "";
+      left: -3px;
+      width: 11px;
+      height: 36px;
+      z-index: -1;
+      background-color: $color-dark;
+    }
+  }
+}

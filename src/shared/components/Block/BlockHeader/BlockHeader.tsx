@@ -3,10 +3,11 @@ import IconClock from "../../../icons/IconClock";
 import IconPlay from "../../../icons/IconPlay";
 import "./BlockHeader.scss";
 import IconFinish from "../../../icons/IconFinish";
+import { formatTimeUntil } from "../../../helpers/formatTimeUntil";
 
 interface IBlockHeader {
   state: string;
-  end_time: Date;
+  end_time: number;
   block_num?: number;
 }
 
@@ -34,14 +35,19 @@ const BlockHeader = ({ state, end_time, block_num }: IBlockHeader) => {
             </span>
             <span className="block-header__timer">
               <IconClock />
-              <span className="block-header__status-text">{time}</span>
+              <span className="block-header__status-text">
+                {formatTimeUntil(end_time)}
+              </span>
             </span>
           </>
         )}
         {state === "on_bet" && (
           <span className="block-header__timer">
             <IconClock />
-            <span className="block-header__status-text">{time}</span>
+            <span className="block-header__status-text">
+              {" "}
+              {formatTimeUntil(end_time)}
+            </span>
           </span>
           // <span className="block-header__status block-header__status-next">
           //   <IconPlay /> <span className="block-header__status-text">NEXT</span>

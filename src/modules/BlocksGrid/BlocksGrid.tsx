@@ -2,15 +2,19 @@ import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { useRecoilState } from "recoil";
 import { blocksState } from "../../store/blocks";
-import { socket } from "../../api/ws";
 import { blocksApi } from "../../api/blocksApi";
 import CurrentBlock from "../CurrentBlock/CurrentBlock";
 import NextBlock from "../NextBlock/NextBlock";
 import Block, { IBlock } from "../../shared/components/Block/Block";
-import "./BlocksGrid.scss";
 import { blocksMocks } from "../../shared/mocks/blocksMocks";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { socket } from "../../api/config";
+import "./BlocksGrid.scss";
 import "swiper/css";
+
+type SocketBlock = {
+  current: IBlock;
+  next: IBlock;
+};
 
 const BlocksGrid = () => {
   const [blocksData, setBlocksData] = useRecoilState(blocksState);
@@ -58,65 +62,32 @@ const BlocksGrid = () => {
   return (
     <div className="blocks-grid">
       {blocksMocks && (
-        // <Swiper
-        //   spaceBetween={16}
-        //   centeredSlides={true}
-        //   // slidesPerView={1}
-        //   slidesPerView={"auto"}
-        //   onSlideChange={() => console.log("slide change")}
-        //   onSwiper={(swiper) => console.log(swiper)}
-        // >
-        //   {blocksMocks
-        //     .map((item: IBlock) => (
-        //       <SwiperSlide>
-        //         <Block
-        //           key={item.block_hash}
-        //           block_hash={item.block_hash}
-        //           block_num={item.block_num}
-        //           previous_block_hash={item.previous_block_hash}
-        //           bet_started_at={item.bet_started_at}
-        //           bet_will_end_at={item.bet_will_end_at}
-        //           will_end_at={item.will_end_at}
-        //           locked_at={item.locked_at}
-        //           state={item.state}
-        //           locked_price={item.locked_price}
-        //           current_price={item.current_price}
-        //           coin={item.coin}
-        //           up_bet_sum={item.up_bet_sum}
-        //           down_bet_sum={item.down_bet_sum}
-        //           current_up_rate={item.current_up_rate}
-        //           current_down_rate={item.current_down_rate}
-        //         />
-        //       </SwiperSlide>
-        //     ))
-        //     .reverse()}
-        // </Swiper>
         <Slider {...settings}>
-          {blocksMocks
-            .map((item: IBlock) => (
-              // <SwiperSlide>
-              <Block
-                key={item.block_hash}
-                block_hash={item.block_hash}
-                block_num={item.block_num}
-                previous_block_hash={item.previous_block_hash}
-                bet_started_at={item.bet_started_at}
-                bet_will_end_at={item.bet_will_end_at}
-                will_end_at={item.will_end_at}
-                locked_at={item.locked_at}
-                state={item.state}
-                locked_price={item.locked_price}
-                current_price={item.current_price}
-                coin={item.coin}
-                up_bet_sum={item.up_bet_sum}
-                down_bet_sum={item.down_bet_sum}
-                current_up_rate={item.current_up_rate}
-                current_down_rate={item.current_down_rate}
-              />
-              // </SwiperSlide>
-            ))
-            .reverse()}
-          {/* <CurrentBlock />  <NextBlock />  */}
+          {blocksMocks &&
+            blocksMocks
+              .map((item: IBlock) => (
+                <Block
+                  key={item.block_hash}
+                  block_hash={item.block_hash}
+                  block_num={item.block_num}
+                  previous_block_hash={item.previous_block_hash}
+                  bet_started_at={item.bet_started_at}
+                  bet_will_end_at={item.bet_will_end_at}
+                  will_end_at={item.will_end_at}
+                  locked_at={item.locked_at}
+                  state={item.state}
+                  locked_price={item.locked_price}
+                  current_price={item.current_price}
+                  coin={item.coin}
+                  up_bet_sum={item.up_bet_sum}
+                  down_bet_sum={item.down_bet_sum}
+                  current_up_rate={item.current_up_rate}
+                  current_down_rate={item.current_down_rate}
+                />
+              ))
+              .reverse()}
+          {/* <CurrentBlock />
+          <NextBlock /> */}
         </Slider>
       )}
     </div>

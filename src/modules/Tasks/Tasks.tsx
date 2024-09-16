@@ -1,51 +1,60 @@
 import { useEffect, useState } from "react";
-import IconTelegram from "../../shared/icons/IconTelegram";
+import { ITask, TaskKind, tasksApi, TaskState } from "../../api/tasksApi";
 import Task from "./Task/Task";
-import "./Tasks.scss";
 import SmallLoader from "../../shared/components/SmallLoader/SmallLoader";
-
-export enum TaskStatus {
-  NOT_COMPLETED = "NOT_COMPLETED",
-  DONE = "DONE",
-  COLLECTED = "COLLECTED",
-}
-
-export interface ITask {
-  title: string;
-  icon: any;
-  reward: number;
-  status: TaskStatus;
-  link?: string;
-  condition?: string;
-}
+import "./Tasks.scss";
 
 const mockedTasks: ITask[] = [
   {
-    title: "Subscribe to Telegram",
-    icon: <IconTelegram />,
-    reward: 50,
-    link: "https://t.me/PredictonNews",
-    status: TaskStatus.NOT_COMPLETED,
-  },
-  {
-    title: "Subscribe to X",
-    icon: <IconTelegram />,
-    reward: 50,
-    link: "https://t.me/neolates",
-    status: TaskStatus.COLLECTED,
+    name: "Subscribe channel",
+    slug: "string1",
+    social: "telegram",
+    description: "",
+    link: "t.me/predicton",
+    points_reward: 100,
+    kind: TaskKind.TG_SUB,
+    state: TaskState.TODO,
+    created_at: 123,
+    completed_at: null,
+    user_id: "134",
   },
 ];
 
 const Tasks = () => {
   const [tasks, setTasks] = useState<ITask[] | false>(false);
 
+  const updateTasks = () => {
+    tasksApi
+      .getTasks()
+      .then((res) => {
+        setTasks(res.data.tasks);
+      })
+      .catch((er) => {
+        console.log(er);
+      });
+  };
+
   useEffect(() => {
-    setTimeout(() => {
-      setTasks(mockedTasks);
-    }, 2500);
+    updateTasks();
+
+    const updateInterval = setInterval(() => {
+      updateTasks();
+    }, 15000);
+
+    return () => {
+      clearInterval(updateInterval);
+    };
   }, []);
 
-  return <div className="tasks">{tasks ? tasks.map((task) => <Task key={task.title} task={task} />) : <SmallLoader />}</div>;
+  return (
+    <div className="tasks">
+      {tasks ? (
+        tasks.map((task) => <Task key={task.slug} task={task} />)
+      ) : (
+        <SmallLoader />
+      )}
+    </div>
+  );
 };
 
 export default Tasks;

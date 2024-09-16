@@ -4,13 +4,17 @@ import { useRecoilState } from "recoil";
 import { userState } from "../../store/userState";
 import { launchState } from "../../store/launchState";
 import "./Preloader.scss";
+import IconLogo from "../../shared/icons/IconLogo";
 
 const Preloader = () => {
   const [, setUserInfo] = useRecoilState(userState);
   const [launchInfo, setLaunchInfo] = useRecoilState(launchState);
 
   useEffect(() => {
+    // DEV MODE
+
     setTimeout(() => {
+      setLaunchInfo({ isDevMode: true, isLoading: false });
       authApi
         .authMe()
         .then((res) => {
@@ -21,14 +25,14 @@ const Preloader = () => {
           authApi
             .registerUser()
             .then((res) => {
-              console.log(res.data);
+              setUserInfo(res.data);
               setLaunchInfo({ isLoading: false, isFirstLaunch: true });
             })
-            .catch((er) => {
-              console.log(er);
+            .catch(() => {
+              // launchInfo?.isDevMode && setLaunchInfo({ isLoading: false });
             });
         });
-    }, 2000);
+    }, 1000);
   }, []);
 
   return (
@@ -36,7 +40,7 @@ const Preloader = () => {
       {launchInfo?.isLoading && (
         <div className="preloader">
           <div className="preloader__content">
-            <h1>LOADING....</h1>
+            <IconLogo />
           </div>
         </div>
       )}

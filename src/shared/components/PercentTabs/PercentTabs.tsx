@@ -8,11 +8,10 @@ interface IPercentTabs {
 }
 
 const PercentTabs = ({ balance, onTabChange }: IPercentTabs) => {
-  const [percent, setPercent] = useState<Number | null>(null);
+  const [percent, setPercent] = useState<number | null>(null);
 
   useEffect(() => {
     if (percent) {
-      console.log("final value: ", (percent * balance) / 100);
       onTabChange((percent * balance) / 100);
     }
   }, [percent]);

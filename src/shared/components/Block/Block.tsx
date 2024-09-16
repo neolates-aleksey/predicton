@@ -19,9 +19,9 @@ export interface IBlock {
   block_hash: string;
   previous_block_hash: string;
   bet_started_at: Date;
-  bet_will_end_at: Date;
+  bet_will_end_at: number;
   locked_at?: Date;
-  will_end_at?: Date;
+  will_end_at: number;
   block_num?: number;
   state: "on_bet" | "locked" | "ended";
   locked_price: number;
@@ -61,6 +61,7 @@ const Block = ({
   block_num,
   state,
   current_price,
+  will_end_at,
   locked_price,
   current_up_rate,
   current_down_rate,
@@ -84,11 +85,7 @@ const Block = ({
 
   return (
     <div className={classNames("block", { block_ended: state === "ended" })}>
-      <BlockHeader
-        block_num={block_num}
-        state={state}
-        end_time={bet_will_end_at}
-      />
+      <BlockHeader block_num={block_num} state={state} end_time={will_end_at} />
 
       <div
         className={classNames("block__body", {

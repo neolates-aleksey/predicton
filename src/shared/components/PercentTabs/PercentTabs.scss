@@ -8,11 +8,12 @@
 
   &__item {
     cursor: pointer;
-    padding: 7px 7px;
+    padding: 5.5px 4px;
     border-radius: 8px;
     color: $color-white;
     background-color: $color-dark-light;
     transition: background-color 0.3s;
+    font-size: 11px;
 
     &:hover {
       background-color: #374c5f;

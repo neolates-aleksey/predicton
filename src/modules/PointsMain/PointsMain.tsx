@@ -2,8 +2,12 @@ import { useState } from "react";
 import Button from "../../shared/components/Button/Button";
 import IconPoints from "../../shared/icons/IconPoints";
 import "./PointsMain.scss";
+import { useRecoilState } from "recoil";
+import { UserState, userState } from "../../store/userState";
+import { authApi } from "../../api/authApi";
 
 const PointsMain = () => {
+  const [userInfo, setUserInfo] = useRecoilState(userState);
   const [timeLeft, setTimeLeft] = useState(0);
   const [buttonLoading, setButtonLoading] = useState(false);
 
@@ -11,6 +15,16 @@ const PointsMain = () => {
     setButtonLoading(true);
 
     //TODO: запрос на бэк на клейм, пока что симуляция через таймаут
+    authApi.pointsClaim().then((res) => {
+      // @ts-ignore
+      const updatedInfo: UserState = {
+        ...userInfo,
+        user: { point_balance: res.data.balance },
+      };
+      console.log(res.data);
+      setUserInfo(updatedInfo);
+    });
+
     setTimeout(() => {
       setTimeLeft(5000);
       setButtonLoading(false);
@@ -25,7 +39,9 @@ const PointsMain = () => {
         </div>
         <div className="points-main__stats">
           <p className="points-main__stats-text">Points on your account</p>
-          <p className="points-main__stats-count">1,946</p>
+          <p className="points-main__stats-count">
+            {userInfo?.user?.point_balance}
+          </p>
         </div>
       </div>
       <p className="points-main__description">

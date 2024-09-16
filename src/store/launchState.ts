@@ -3,7 +3,7 @@ import { atom } from "recoil";
 type LaunchState = {
   isFirstLaunch?: boolean;
   isDevMode?: boolean;
-  isLoading: boolean;
+  isLoading?: boolean;
 };
 
 export const launchState = atom<LaunchState | null>({

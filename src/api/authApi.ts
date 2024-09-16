@@ -11,7 +11,12 @@ async function registerUser() {
   return await api.post(`/auth/twa/sigin`, {});
 }
 
+async function pointsClaim() {
+  return await api.post(`/points/claim`, {});
+}
+
 export const authApi = {
   authMe,
   registerUser,
+  pointsClaim,
 };
