@@ -1,6 +1,6 @@
 import { retrieveLaunchParams } from "@tma.js/sdk";
 
-const url = "bore.pub:18021";
+const url = "195.133.144.10";
 
 export const baseURL = `http://${url}/api/0.0.1/`;
 

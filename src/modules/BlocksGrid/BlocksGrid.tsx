@@ -63,8 +63,8 @@ const BlocksGrid = () => {
     <div className="blocks-grid">
       {blocksMocks && (
         <Slider {...settings}>
-          {/* {latestsBlocks &&
-            latestsBlocks
+          {blocksMocks &&
+            blocksMocks
               .map((item: IBlock) => (
                 <Block
                   key={item.block_hash}
@@ -85,9 +85,9 @@ const BlocksGrid = () => {
                   current_down_rate={item.current_down_rate}
                 />
               ))
-              .reverse()} */}
-          {blocksData?.current && <CurrentBlock />}
-          <NextBlock />
+              .reverse()}
+          {/* {blocksData?.current && <CurrentBlock />}
+          <NextBlock /> */}
         </Slider>
       )}
     </div>

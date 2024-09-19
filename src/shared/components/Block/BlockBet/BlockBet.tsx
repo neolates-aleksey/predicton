@@ -65,17 +65,28 @@ const BlockBet = ({ closeHandler, side, className }: IBlockBet) => {
       </div>
       <div className="block-bet__content">
         <input
-          value={betValue ? betValue : undefined}
+          value={typeof betValue === "number" ? Number(betValue) : undefined}
           onChange={(e) => handleInputChange(Number(e.target.value))}
-          placeholder="min 0.5 USDT"
+          placeholder="min 5 POINTS"
           className="block-bet__input"
           type="number"
         />
 
-        {userInfo?.user?.point_balance && <PercentTabs onTabChange={setBetValue} balance={userInfo?.user?.point_balance} />}
+        {typeof userInfo?.user?.point_balance === "number" && (
+          <PercentTabs
+            onTabChange={setBetValue}
+            betValue={betValue}
+            balance={userInfo?.user?.point_balance}
+          />
+        )}
       </div>
 
-      <Range />
+      {typeof userInfo?.user?.point_balance === "number" && (
+        <Range
+          onRangeChange={setBetValue}
+          balance={userInfo?.user?.point_balance}
+        />
+      )}
 
       <Button
         onClick={() => handleMakeBet()}
@@ -83,10 +94,18 @@ const BlockBet = ({ closeHandler, side, className }: IBlockBet) => {
         isRounded
         isPrimary
         isDisabled={!betValue || betValue < 0.5}
-        text="Make a Prediction"
+        text={
+          typeof userInfo?.user?.point_balance === "number" &&
+          userInfo?.user?.point_balance === 0
+            ? "Not enought balance"
+            : "Make a Prediction"
+        }
       />
 
-      <p className="block-bet__info">You won't be able to delete or change your position once you make a prediction</p>
+      <p className="block-bet__info">
+        You won't be able to delete or change your position once you make a
+        prediction
+      </p>
     </div>
   );
 };

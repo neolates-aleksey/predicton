@@ -5,9 +5,10 @@ import classNames from "classnames";
 interface IPercentTabs {
   balance: number;
   onTabChange: any;
+  betValue: number | null;
 }
 
-const PercentTabs = ({ balance, onTabChange }: IPercentTabs) => {
+const PercentTabs = ({ balance, onTabChange, betValue }: IPercentTabs) => {
   const [percent, setPercent] = useState<number | null>(null);
 
   useEffect(() => {
@@ -15,6 +16,14 @@ const PercentTabs = ({ balance, onTabChange }: IPercentTabs) => {
       onTabChange((percent * balance) / 100);
     }
   }, [percent]);
+
+  useEffect(() => {
+    if (percent) {
+      if (betValue && betValue !== (percent * balance) / 100) {
+        setPercent(null);
+      }
+    }
+  }, [betValue]);
 
   return (
     <div className="percent-tabs">

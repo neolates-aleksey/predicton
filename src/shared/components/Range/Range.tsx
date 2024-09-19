@@ -1,22 +1,27 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import "./Range.scss";
 
-const Range = () => {
+type Props = {
+  onRangeChange: any;
+  balance: number;
+};
+
+const Range = ({ onRangeChange, balance }: Props) => {
   const blockRef = useRef<HTMLDivElement>(null);
   const [percent, setPercent] = useState<number>(0);
 
-  const calculatePercent = () => {};
+  const calculatePercent = () => {
+    if (balance === 0) {
+      onRangeChange(0);
+    } else {
+      onRangeChange((percent * balance) / 100);
+    }
+  };
 
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     if (!blockRef.current) {
       return;
     }
-
-    // const touch = e.touches[0];
-    // const touchX = touch.pageX;
-
-    // const blockRect = blockRef.current.getBoundingClientRect()
-    // const blockStartX = blockRect.left
 
     const touch = e.touches[0];
     const touchX = touch.pageX;
@@ -31,13 +36,27 @@ const Range = () => {
     // Рассчитываем процент
     const newPercent = Math.min(Math.max(offsetX / blockWidth, 0), 1) * 100;
 
-    // Обновляем состояние процента
-    setPercent(Number(newPercent.toFixed(0)));
-  };
+    if (newPercent > 98) {
+      setPercent(100);
+      onRangeChange(balance);
+    } else {
+      if (newPercent < 2) {
+        setPercent(1);
+        onRangeChange(0);
+      } else {
+        setPercent(Number(newPercent.toFixed(0)));
+        onRangeChange((Number(newPercent.toFixed(0)) * balance) / 100);
+      }
+    }
 
-  useEffect(() => {
-    console.log(percent);
-  }, [percent]);
+    // if (balance === 0) {
+    //   onRangeChange(0);
+    // } else {
+    //   onRangeChange((Number(newPercent.toFixed(0)) * balance) / 100);
+    // }
+
+    // calculatePercent();
+  };
 
   return (
     <div

@@ -14,6 +14,7 @@
     background-color: $color-dark-light;
     transition: background-color 0.3s;
     font-size: 11px;
+    border: 2px solid $color-dark-light;
 
     &:hover {
       background-color: #374c5f;
