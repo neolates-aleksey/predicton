@@ -10,6 +10,8 @@ import { blocksMocks } from "../../shared/mocks/blocksMocks";
 import { socket } from "../../api/config";
 import "./BlocksGrid.scss";
 import "swiper/css";
+import { betsApi } from "../../api/betsApi";
+import { userBets } from "../../store/userBets";
 
 type SocketBlock = {
   current: IBlock;
@@ -18,18 +20,32 @@ type SocketBlock = {
 
 const BlocksGrid = () => {
   const [blocksData, setBlocksData] = useRecoilState(blocksState);
+  const [, setBetsInfo] = useRecoilState(userBets);
   const [latestsBlocks, setLatestsBlocks] = useState<IBlock[]>();
 
   useEffect(() => {
-    blocksApi.getLatestBlocks(3, "point_block").then((res) => {
-      console.log(res.data);
-      setLatestsBlocks(res.data);
+    blocksApi.getBlocks(5, "point_block").then((res) => {
+      const endedBlocks: IBlock[] = [];
+
+      res.data.forEach((block: IBlock) => {
+        block.state === "ended" && endedBlocks.push(block);
+      });
+
+      setLatestsBlocks(endedBlocks);
+
+      // console.log(res.data);
+      // setLatestsBlocks(res.data);
     });
+
     socket.onmessage = function (event) {
       const block = JSON.parse(event.data);
       console.log(block);
       setBlocksData(block);
     };
+
+    betsApi.myBets("point_block", 5).then((res) => {
+      setBetsInfo(res.data);
+    });
   }, []);
 
   const settings = {
@@ -63,8 +79,8 @@ const BlocksGrid = () => {
     <div className="blocks-grid">
       {blocksMocks && (
         <Slider {...settings}>
-          {blocksMocks &&
-            blocksMocks
+          {latestsBlocks &&
+            latestsBlocks
               .map((item: IBlock) => (
                 <Block
                   key={item.block_hash}
@@ -86,8 +102,9 @@ const BlocksGrid = () => {
                 />
               ))
               .reverse()}
-          {/* {blocksData?.current && <CurrentBlock />}
-          <NextBlock /> */}
+
+          {blocksData?.current && <CurrentBlock />}
+          {blocksData?.next && <NextBlock />}
         </Slider>
       )}
     </div>

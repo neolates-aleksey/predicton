@@ -8,6 +8,7 @@ import Range from "../../Range/Range";
 import { useRecoilState } from "recoil";
 import { userState } from "../../../../store/userState";
 import { betsApi } from "../../../../api/betsApi";
+import { userBets } from "../../../../store/userBets";
 
 interface IBlockBet {
   closeHandler: () => void;
@@ -17,7 +18,7 @@ interface IBlockBet {
 
 const BlockBet = ({ closeHandler, side, className }: IBlockBet) => {
   const [userInfo] = useRecoilState(userState);
-
+  const [, setBetsInfo] = useRecoilState(userBets);
   const [betValue, setBetValue] = useState<number | null>(null);
 
   const handleInputChange = (value: number) => {
@@ -41,6 +42,10 @@ const BlockBet = ({ closeHandler, side, className }: IBlockBet) => {
       side &&
       betsApi.makeBet(betValue, side).then((res) => {
         console.log(res.data);
+
+        betsApi.myBets("point_block", 5).then((res) => {
+          setBetsInfo(res.data);
+        });
       });
   };
 
@@ -73,20 +78,11 @@ const BlockBet = ({ closeHandler, side, className }: IBlockBet) => {
         />
 
         {typeof userInfo?.user?.point_balance === "number" && (
-          <PercentTabs
-            onTabChange={setBetValue}
-            betValue={betValue}
-            balance={userInfo?.user?.point_balance}
-          />
+          <PercentTabs onTabChange={setBetValue} betValue={betValue} balance={userInfo?.user?.point_balance} />
         )}
       </div>
 
-      {typeof userInfo?.user?.point_balance === "number" && (
-        <Range
-          onRangeChange={setBetValue}
-          balance={userInfo?.user?.point_balance}
-        />
-      )}
+      {typeof userInfo?.user?.point_balance === "number" && <Range onRangeChange={setBetValue} balance={userInfo?.user?.point_balance} />}
 
       <Button
         onClick={() => handleMakeBet()}
@@ -94,18 +90,10 @@ const BlockBet = ({ closeHandler, side, className }: IBlockBet) => {
         isRounded
         isPrimary
         isDisabled={!betValue || betValue < 0.5}
-        text={
-          typeof userInfo?.user?.point_balance === "number" &&
-          userInfo?.user?.point_balance === 0
-            ? "Not enought balance"
-            : "Make a Prediction"
-        }
+        text={typeof userInfo?.user?.point_balance === "number" && userInfo?.user?.point_balance === 0 ? "Not enought balance" : "Make a Prediction"}
       />
 
-      <p className="block-bet__info">
-        You won't be able to delete or change your position once you make a
-        prediction
-      </p>
+      <p className="block-bet__info">You won't be able to delete or change your position once you make a prediction</p>
     </div>
   );
 };

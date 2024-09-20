@@ -2,7 +2,7 @@ import { atom } from "recoil";
 
 export type UserState = {
   message: string;
-  user?: {
+  user: {
     id?: string;
     username?: string;
     created_at?: number;

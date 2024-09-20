@@ -4,9 +4,10 @@ import IconPlay from "../../../icons/IconPlay";
 import "./BlockHeader.scss";
 import IconFinish from "../../../icons/IconFinish";
 import { formatTimeUntil } from "../../../helpers/formatTimeUntil";
+import { BlockState } from "../Block";
 
 interface IBlockHeader {
-  state: string;
+  state: BlockState;
   end_time: number;
   block_num?: number;
 }
@@ -39,7 +40,7 @@ const BlockHeader = ({ state, end_time, block_num }: IBlockHeader) => {
             </span>
           </>
         )}
-        {state === "on_bet" && (
+        {(state === "on_bet" || state === "wait_for_bet") && (
           <span className="block-header__timer">
             <IconClock />
             <span className="block-header__status-text"> {formatTimeUntil(end_time)}</span>

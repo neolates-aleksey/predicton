@@ -110,6 +110,38 @@
       color: $color-black;
     }
   }
+
+  &__bet {
+    display: flex;
+    justify-content: space-between;
+    background-color: $color-dark-light;
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin-top: 8px;
+  }
+
+  &__bet-side {
+    &_up {
+      color: $color-green;
+    }
+
+    &_down {
+      color: $color-red;
+    }
+  }
+
+  &__bet-info {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 17.55px;
+    color: #fff;
+  }
+
+  &__bet-count {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 17.55px;
+  }
 }
 
 .mountedStyle {

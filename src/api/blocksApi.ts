@@ -3,6 +3,10 @@ import { baseURL } from "./config";
 
 const api = axios.create({ baseURL: baseURL });
 
+async function getBlocks(num: number, block_kind: "point_block" | "coin_block") {
+  return await api.get(`/blocks?num=${num}&block_kind=${block_kind}`, {});
+}
+
 async function getCurrentBlock() {
   return await api.get(`/blocks/current`, {});
 }
@@ -16,6 +20,7 @@ async function getLatestBlocks(num: number, block_kind: "point_block" | "coin_bl
 }
 
 export const blocksApi = {
+  getBlocks,
   getCurrentBlock,
   getNextBlock,
   getLatestBlocks,

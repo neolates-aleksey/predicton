@@ -9,6 +9,11 @@ async function makeBet(points: number, side: "UP" | "DOWN") {
   return await api.post(`/bets/points?points=${points}&side=${newSide}`, {});
 }
 
+async function myBets(block_kind: "point_block" | "coin_block", num: number) {
+  return await api.get(`/bets/my?block_kind=${block_kind}&num=${num}`, {});
+}
+
 export const betsApi = {
   makeBet,
+  myBets,
 };

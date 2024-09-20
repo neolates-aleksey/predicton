@@ -1,8 +1,9 @@
 import { retrieveLaunchParams } from "@tma.js/sdk";
 
-const url = "195.133.144.10";
+const url = "predicton.xyz";
+// const url = "195.133.144.10";
 
-export const baseURL = `http://${url}/api/0.0.1/`;
+export const baseURL = `https://${url}/api/api/0.0.1/`;
 
 export const getTgToken = (): string => {
   try {
@@ -20,6 +21,6 @@ export const userHeadersConfig = {
   Authorization: `${getTgToken()}`,
 };
 
-const socketUrl = `ws://${url}/api/latest/blocks/ws/point_block`;
+const socketUrl = `wss://${url}/api/latest/blocks/ws/point_block`;
 
 export let socket = new WebSocket(socketUrl);

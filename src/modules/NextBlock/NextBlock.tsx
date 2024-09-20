@@ -18,6 +18,7 @@ const NextBlock = () => {
           key={blockInfo.block_hash}
           block_num={blockInfo.block_num}
           block_hash={blockInfo.block_hash}
+          block_kind={blockInfo.block_kind}
           bet_started_at={blockInfo.bet_started_at}
           bet_will_end_at={blockInfo.bet_will_end_at}
           will_end_at={blockInfo.will_end_at}

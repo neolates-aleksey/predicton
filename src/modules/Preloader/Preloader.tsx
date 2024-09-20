@@ -1,20 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { authApi } from "../../api/authApi";
 import { useRecoilState } from "recoil";
 import { userState } from "../../store/userState";
 import { launchState } from "../../store/launchState";
 import "./Preloader.scss";
 import IconLogo from "../../shared/icons/IconLogo";
+import ServerError from "./ServerError/ServerError";
 
 const Preloader = () => {
   const [, setUserInfo] = useRecoilState(userState);
   const [launchInfo, setLaunchInfo] = useRecoilState(launchState);
+  const [errorType, setErrorType] = useState<"server" | "wrong_device" | null>(null);
 
   useEffect(() => {
-    // DEV MODE
-
     setTimeout(() => {
-      setLaunchInfo({ isDevMode: true, isLoading: false });
+      // DEV MODE
+      // setLaunchInfo({ isDevMode: false, isLoading: false });
       authApi
         .authMe()
         .then((res) => {
@@ -29,6 +30,7 @@ const Preloader = () => {
               setLaunchInfo({ isLoading: false, isFirstLaunch: true });
             })
             .catch(() => {
+              setErrorType("server");
               // launchInfo?.isDevMode && setLaunchInfo({ isLoading: false });
             });
         });
@@ -40,7 +42,8 @@ const Preloader = () => {
       {launchInfo?.isLoading && (
         <div className="preloader">
           <div className="preloader__content">
-            <IconLogo />
+            {!errorType && <IconLogo />}
+            {errorType === "server" && <ServerError />}
           </div>
         </div>
       )}

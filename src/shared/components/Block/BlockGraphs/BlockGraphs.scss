@@ -18,7 +18,7 @@
   }
 
   &__item-bets {
-    border-radius: 8px;
+    border-radius: 6px;
     padding: 12px 14px;
     min-height: 60px;
     transition: height 0.25s ease-in;
@@ -28,10 +28,24 @@
 
     &_up {
       background-color: $color-green;
+
+      &_outline {
+        background-color: inherit;
+        border: 2px solid $color-green;
+
+        .block-graphs__bet-info_up p {
+          color: #fff;
+        }
+      }
     }
 
     &_down {
       background-color: $color-red;
+
+      &_outline {
+        background-color: inherit;
+        border: 2px solid $color-red;
+      }
     }
   }
 
