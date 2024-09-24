@@ -13,18 +13,38 @@ interface IBlockHeader {
 }
 
 const BlockHeader = ({ state, end_time, block_num }: IBlockHeader) => {
-  const [time, setTime] = useState(0);
+  const [secondsRemaining, setSecondsRemaining] = useState<number>(0);
 
-  // useEffect(() => {
-  // let time_left = Math.floor(end_time - Date.now() / 1000);
-  // setInterval(() => {
-  //   time_left = Math.floor(end_time - Date.now() / 1000);
-  //   if (time_left < 0) {
-  //     time_left = 0;
-  //   }
-  //   setTime(time_left);
-  // }, 1000);
-  // }, []);
+  const formatTime = (seconds: number): string => {
+    const minutes: number = Math.floor(seconds / 60);
+    const remainingSeconds: number = seconds % 60;
+
+    const formattedMinutes: string = String(minutes).padStart(2, "0");
+    const formattedSeconds: string = String(remainingSeconds).padStart(2, "0");
+
+    return `${formattedMinutes}:${formattedSeconds}`;
+  };
+
+  useEffect(() => {
+    let intervalId = null;
+
+    if (state === "locked") {
+      const calculateRemainingTime = () => {
+        const currentTime = Math.floor(Date.now() / 1000);
+        const remaining = end_time - currentTime;
+
+        setSecondsRemaining(Math.max(remaining, 0));
+      };
+
+      calculateRemainingTime();
+
+      intervalId = setInterval(calculateRemainingTime, 1000);
+    }
+
+    return () => {
+      intervalId && clearInterval(intervalId);
+    };
+  }, [end_time]);
 
   return (
     <div className="block-header">
@@ -36,22 +56,30 @@ const BlockHeader = ({ state, end_time, block_num }: IBlockHeader) => {
             </span>
             <span className="block-header__timer">
               <IconClock />
-              <span className="block-header__status-text">{formatTimeUntil(end_time)}</span>
+              <span className="block-header__status-text">
+                {formatTime(secondsRemaining)}
+              </span>
             </span>
           </>
         )}
         {(state === "on_bet" || state === "wait_for_bet") && (
-          <span className="block-header__timer">
-            <IconClock />
-            <span className="block-header__status-text"> {formatTimeUntil(end_time)}</span>
-          </span>
-          // <span className="block-header__status block-header__status-next">
-          //   <IconPlay /> <span className="block-header__status-text">NEXT</span>
-          // </span>
+          <>
+            <span className="block-header__status block-header__status-next">
+              <IconPlay />{" "}
+              <span className="block-header__status-text">NEXT</span>
+            </span>
+          </>
         )}
         {state === "ended" && (
           <span className="block-header__status block-header__status_expired">
-            <IconFinish /> <span className="block-header__status-text">EXPIRED</span>
+            <IconFinish />{" "}
+            <span className="block-header__status-text">EXPIRED</span>
+          </span>
+        )}
+        {state === "later" && (
+          <span className="block-header__status block-header__status_expired">
+            <IconPlay />{" "}
+            <span className="block-header__status-text">LATER</span>
           </span>
         )}
       </div>

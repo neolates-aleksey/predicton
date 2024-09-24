@@ -5,16 +5,29 @@ import "./Main.scss";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { userState } from "../../store/userState";
+import { blocksState } from "../../store/blocks";
 
 const Main = () => {
   const [userInfo] = useRecoilState(userState);
-  const [first, setfirst] = useState(6.5323);
+  const [blocksData] = useRecoilState(blocksState);
+  const [coinPrice, setCoinPrice] = useState<number | null>(null);
 
   useEffect(() => {
-    setInterval(() => {
-      setfirst((prev) => prev + Math.random());
-    }, 3000);
-  }, []);
+    const getPriceFromBlock = () => {
+      if (blocksData?.next.current_price) {
+        return blocksData?.next.current_price;
+      }
+      if (blocksData?.current.current_price) {
+        return blocksData?.current.current_price;
+      }
+    };
+
+    const currentPrice = getPriceFromBlock();
+
+    if (coinPrice !== currentPrice) {
+      currentPrice && setCoinPrice(Number(currentPrice.toFixed(4)));
+    }
+  }, [blocksData]);
 
   return (
     <div className="main">
@@ -25,7 +38,15 @@ const Main = () => {
             <div className="main__item-pair-content">
               <p className="main__item-title">TON/USDT</p>
               <p className="main__item-text">
-                <MotionNumber value={first} format={{ notation: "standard" }} locales="en-US" />
+                {coinPrice ? (
+                  <MotionNumber
+                    value={coinPrice}
+                    format={{ notation: "standard" }}
+                    locales="en-US"
+                  />
+                ) : (
+                  "loading"
+                )}
               </p>
             </div>
           </div>
@@ -33,7 +54,16 @@ const Main = () => {
         <div className="main__item">
           <div className="main__item-balance">
             <p className="main__item-title">Balance</p>
-            <p className="main__item-text">{userInfo?.user?.point_balance} POINTS</p>
+            <p className="main__item-text">
+              {userInfo?.user?.point_balance && (
+                <MotionNumber
+                  value={userInfo?.user?.point_balance}
+                  format={{ notation: "standard" }}
+                  locales="en-US"
+                />
+              )}{" "}
+              POINTS
+            </p>
           </div>
         </div>
       </div>

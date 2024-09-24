@@ -11,19 +11,29 @@ interface IBlockGraphs {
   up_rate: number;
   down_rate: number;
   blockState: BlockState;
+  users_up: number;
+  users_down: number;
 }
 
-const BlockGraphs = ({ up_sum, down_sum, up_rate, down_rate, blockState }: IBlockGraphs) => {
+const BlockGraphs = ({
+  up_sum,
+  down_sum,
+  up_rate,
+  down_rate,
+  blockState,
+  users_down,
+  users_up,
+}: IBlockGraphs) => {
   const [upPercent, setUpPercent] = useState(30);
   const [downPercent, setDownPercent] = useState(30);
 
   useEffect(() => {
-    if (up_rate > 1.95 && up_rate < 2.05) {
+    if (up_rate > 1.95) {
       setUpPercent(50);
       setDownPercent(50);
     }
 
-    if (up_rate > 2.05 && up_rate < 2.3) {
+    if (up_rate > 2.05 && down_rate < 2.3) {
       setUpPercent(60);
       setDownPercent(40);
     }
@@ -47,16 +57,20 @@ const BlockGraphs = ({ up_sum, down_sum, up_rate, down_rate, blockState }: IBloc
         </div>
         <div
           style={{ height: `${downPercent}%` }}
-          className={classNames("block-graphs__item-bets block-graphs__item-bets_down", {
-            "block-graphs__item-bets_down_outline": blockState === "on_bet" || blockState === "wait_for_bet",
-          })}
+          className={classNames(
+            "block-graphs__item-bets block-graphs__item-bets_down",
+            {
+              "block-graphs__item-bets_down_outline":
+                blockState === "on_bet" || blockState === "wait_for_bet",
+            }
+          )}
         >
           <div className="block-graphs__bet-arrow">
             <IconArrowUp color={"white"} />
           </div>
           <div className="block-graphs__bet-info">
             <p className="block-graphs__bet-sum">{down_sum} $</p>
-            <p className="block-graphs__bet-count">12 users</p>
+            <p className="block-graphs__bet-count">{users_down} users</p>
           </div>
         </div>
       </div>
@@ -68,16 +82,26 @@ const BlockGraphs = ({ up_sum, down_sum, up_rate, down_rate, blockState }: IBloc
         </div>
         <div
           style={{ height: `${upPercent}%` }}
-          className={classNames("block-graphs__item-bets block-graphs__item-bets_up", {
-            "block-graphs__item-bets_up_outline": blockState === "on_bet" || blockState === "wait_for_bet",
-          })}
+          className={classNames(
+            "block-graphs__item-bets block-graphs__item-bets_up",
+            {
+              "block-graphs__item-bets_up_outline":
+                blockState === "on_bet" || blockState === "wait_for_bet",
+            }
+          )}
         >
           <div className="block-graphs__bet-arrow">
-            <IconArrowDown color={blockState === "on_bet" || blockState === "wait_for_bet" ? "white" : "black"} />
+            <IconArrowDown
+              color={
+                blockState === "on_bet" || blockState === "wait_for_bet"
+                  ? "white"
+                  : "black"
+              }
+            />
           </div>
           <div className="block-graphs__bet-info block-graphs__bet-info_up">
             <p className="block-graphs__bet-sum">{up_sum} $</p>
-            <p className="block-graphs__bet-count">12 users</p>
+            <p className="block-graphs__bet-count">{users_up} users</p>
           </div>
         </div>
       </div>

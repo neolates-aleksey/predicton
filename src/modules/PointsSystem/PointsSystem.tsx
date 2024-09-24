@@ -13,7 +13,7 @@ import "./PointsSystem.scss";
 const PointsSystem = () => {
   return (
     <div className="points-system">
-      <div className="points-system__block">
+      {/* <div className="points-system__block">
         <p className="points-system__title">
           <IconCoin /> Points for Predictions
         </p>
@@ -26,7 +26,7 @@ const PointsSystem = () => {
           For example, if you made a prediction of 7 USDT, then no matter the
           outcome you will get 10 + 7.00 × 1.25 = 18.75 points in your account
         </p>
-      </div>
+      </div> */}
       <div className="points-system__block">
         <p className="points-system__title">
           <IconCoin /> Points for Tasks
@@ -72,10 +72,10 @@ const PointsSystem = () => {
               Total Earnings from Frens
             </p>
             <div className="points-system__earnings-content">
-              <div className="points-system__earnings-block">
+              {/* <div className="points-system__earnings-block">
                 <p className="points-system__earnings-text">0</p>
                 <p className="points-system__earnings-description">USDT</p>
-              </div>
+              </div> */}
               <div className="points-system__earnings-block">
                 <p className="points-system__earnings-text">0</p>
                 <p className="points-system__earnings-description">points</p>

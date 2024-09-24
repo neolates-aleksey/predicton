@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import { useRecoilState } from "recoil";
 import { blocksState } from "../../store/blocks";
@@ -6,25 +6,53 @@ import { blocksApi } from "../../api/blocksApi";
 import CurrentBlock from "../CurrentBlock/CurrentBlock";
 import NextBlock from "../NextBlock/NextBlock";
 import Block, { IBlock } from "../../shared/components/Block/Block";
-import { blocksMocks } from "../../shared/mocks/blocksMocks";
 import { socket } from "../../api/config";
-import "./BlocksGrid.scss";
 import "swiper/css";
 import { betsApi } from "../../api/betsApi";
 import { userBets } from "../../store/userBets";
+import ContentLoader from "react-content-loader";
+import BlockLater from "./BlockLater/BlockLater";
+import "./BlocksGrid.scss";
+import { sliderState } from "../../store/sliderState";
 
-type SocketBlock = {
-  current: IBlock;
-  next: IBlock;
+const settings = {
+  dots: false,
+  infinite: false,
+  speed: 500,
+  slidesToShow: 4,
+  className: "blocks-grid__slider",
+  centerMode: true,
+  initialSlide: 3,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 2,
+        initialSlide: 4,
+      },
+    },
+    {
+      breakpoint: 784,
+      settings: {
+        centerPadding: "46px",
+        slidesToShow: 1,
+        centerMode: true,
+      },
+    },
+  ],
 };
 
 const BlocksGrid = () => {
   const [blocksData, setBlocksData] = useRecoilState(blocksState);
+  const [sliderInfo] = useRecoilState(sliderState);
   const [, setBetsInfo] = useRecoilState(userBets);
   const [latestsBlocks, setLatestsBlocks] = useState<IBlock[]>();
+  const [isLoading, setIsLoading] = useState(true);
+
+  let sliderRef = useRef(null);
 
   useEffect(() => {
-    blocksApi.getBlocks(5, "point_block").then((res) => {
+    blocksApi.getBlocks(4, "point_block").then((res) => {
       const endedBlocks: IBlock[] = [];
 
       res.data.forEach((block: IBlock) => {
@@ -32,9 +60,6 @@ const BlocksGrid = () => {
       });
 
       setLatestsBlocks(endedBlocks);
-
-      // console.log(res.data);
-      // setLatestsBlocks(res.data);
     });
 
     socket.onmessage = function (event) {
@@ -43,42 +68,48 @@ const BlocksGrid = () => {
       setBlocksData(block);
     };
 
+    socket.onopen = function (e) {
+      console.log(e);
+    };
+
+    socket.onclose = function (e) {
+      console.log(e);
+    };
+
+    socket.onclose = function (e) {
+      console.log(e);
+    };
+
     betsApi.myBets("point_block", 5).then((res) => {
       setBetsInfo(res.data);
     });
   }, []);
 
-  const settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 4,
-    className: "blocks-grid__slider",
-    centerMode: true,
-    initialSlide: 3,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          initialSlide: 4,
-        },
-      },
-      {
-        breakpoint: 784,
-        centerPadding: "20px",
-        settings: {
-          slidesToShow: 1,
-          centerMode: true,
-        },
-      },
-    ],
-  };
+  useEffect(() => {
+    if (isLoading) {
+      blocksData &&
+        latestsBlocks &&
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 800);
+    }
+  }, [latestsBlocks, blocksData]);
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     // @ts-ignore
+  //     sliderRef && sliderRef.current.slickGoTo(1);
+  //   }, 300);
+  // }, [sliderRef]);
 
   return (
     <div className="blocks-grid">
-      {blocksMocks && (
-        <Slider {...settings}>
+      {!isLoading ? (
+        <Slider
+          touchMove={sliderInfo?.isAbleToScroll}
+          ref={sliderRef}
+          {...settings}
+        >
           {latestsBlocks &&
             latestsBlocks
               .map((item: IBlock) => (
@@ -99,13 +130,39 @@ const BlocksGrid = () => {
                   down_bet_sum={item.down_bet_sum}
                   current_up_rate={item.current_up_rate}
                   current_down_rate={item.current_down_rate}
+                  total_users_bet_down={item.total_users_bet_down}
+                  total_users_bet_up={item.total_users_bet_up}
                 />
               ))
               .reverse()}
 
           {blocksData?.current && <CurrentBlock />}
           {blocksData?.next && <NextBlock />}
+          {blocksData?.next && (
+            <BlockLater
+              next_block_state={blocksData?.next.state}
+              next_block_end={blocksData.next.bet_will_end_at}
+              next_block_number={blocksData.next.block_num}
+            />
+          )}
         </Slider>
+      ) : (
+        <div className="blocks-grid__loader">
+          <ContentLoader
+            className="blocks-grid__loader-main"
+            speed={2}
+            width={294}
+            height={336}
+            viewBox="0 0 294 336"
+            backgroundColor="#20303F"
+            foregroundColor="#324353"
+          >
+            <rect x="3" y="0" rx="16" ry="16" width="294" height="336" />
+          </ContentLoader>
+
+          <div className="blocks-grid__loader-right"></div>
+          <div className="blocks-grid__loader-left"></div>
+        </div>
       )}
     </div>
   );

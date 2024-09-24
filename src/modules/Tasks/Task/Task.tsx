@@ -15,8 +15,6 @@ const Task = ({ task }: ITaskProps) => {
   const [checkTask, setCheckTask] = useState<boolean>(false);
 
   const missionCallback = () => {
-    console.log("aa");
-
     (task.kind === TaskKind.TG_SUB || task.kind === TaskKind.EXT_SUB) &&
       handleLinkClick();
   };

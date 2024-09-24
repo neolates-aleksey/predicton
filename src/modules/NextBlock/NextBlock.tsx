@@ -5,7 +5,7 @@ import { blocksState } from "../../store/blocks";
 
 const NextBlock = () => {
   const [blockInfo, setBlockInfo] = useState<IBlock | null>(null);
-  const [blocksData, setBlocksData] = useRecoilState(blocksState);
+  const [blocksData] = useRecoilState(blocksState);
 
   useEffect(() => {
     blocksData && setBlockInfo(blocksData.next);
@@ -22,6 +22,8 @@ const NextBlock = () => {
           bet_started_at={blockInfo.bet_started_at}
           bet_will_end_at={blockInfo.bet_will_end_at}
           will_end_at={blockInfo.will_end_at}
+          total_users_bet_down={blockInfo.total_users_bet_down}
+          total_users_bet_up={blockInfo.total_users_bet_up}
           locked_at={blockInfo.locked_at}
           state={blockInfo.state}
           locked_price={blockInfo.locked_price}

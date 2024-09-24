@@ -9,6 +9,10 @@
       padding: 20px 0;
     }
 
+    &:last-child {
+      border-bottom: 0;
+    }
+
     &:first-child {
       padding-top: 0;
     }

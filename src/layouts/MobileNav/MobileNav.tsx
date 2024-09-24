@@ -20,9 +20,21 @@ const MobileNav = () => {
   };
 
   useEffect(() => {
-    window.location.pathname === "/onboarding"
-      ? setVisible(false)
-      : setVisible(true);
+    const path = window.location.pathname;
+
+    if (path === "/onboarding") {
+      setVisible(false);
+    } else {
+      setVisible(true);
+    }
+
+    if (path === "/points") {
+      setActiveTab(2);
+    }
+
+    if (path === "/account") {
+      setActiveTab(3);
+    }
   }, [window.location.pathname]);
 
   return (

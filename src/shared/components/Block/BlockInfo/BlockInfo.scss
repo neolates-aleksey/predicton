@@ -5,11 +5,11 @@
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 20px;
-  grid-row-gap: 16px;
+  grid-row-gap: 12px;
   align-items: center;
 
   &__title {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 400;
     line-height: 18px;
     color: $color-gray;
@@ -22,17 +22,18 @@
 
   &__text {
     color: $color-white;
-    font-size: 20px;
+    font-size: 17px;
     line-height: 24px;
     font-weight: 600;
 
     &_small {
-      font-size: 17px;
+      font-size: 16px;
+      line-height: 21px;
     }
   }
 
   &__change {
-    padding: 6px 12px;
+    padding: 4px 10px;
     border-radius: 8px;
     background-color: $color-gray;
 
@@ -57,7 +58,7 @@
   }
 
   &__change-text {
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 600;
     line-height: 24px;
     color: $color-black;

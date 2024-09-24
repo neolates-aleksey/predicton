@@ -5,4 +5,40 @@
   &__graphs {
     height: 100%;
   }
+
+  &__loader {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+  }
+
+  &__loader-main {
+    width: calc(100vw - 100px);
+    height: auto;
+  }
+
+  &__loader-right {
+    position: absolute;
+    content: "";
+    right: -20px;
+    border-radius: 16px;
+    top: 0;
+    width: 50px;
+
+    background-color: #20303f;
+    height: 100%;
+  }
+
+  &__loader-left {
+    position: absolute;
+    content: "";
+    left: -20px;
+    border-radius: 16px;
+    top: 0;
+    width: 50px;
+
+    background-color: #20303f;
+    height: 100%;
+  }
 }

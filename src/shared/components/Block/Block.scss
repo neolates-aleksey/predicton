@@ -1,8 +1,10 @@
 @import "../../styles/variables.scss";
+@import "../../styles/texts.scss";
 
 .block {
   max-width: 365px;
   margin: 0 auto;
+  overflow: hidden;
 
   @include mobile {
     max-width: calc(100vw - 105px);
@@ -39,6 +41,43 @@
     &_green {
       border: 3px solid $color-green;
     }
+  }
+
+  &__later {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #20303fe5;
+    backdrop-filter: blur(6px);
+    left: 0;
+    top: 0;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__later-timer {
+    font-size: 64px;
+    font-weight: 600;
+    line-height: 76.8px;
+  }
+
+  &__later-content {
+    text-align: center;
+  }
+
+  &__later-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  &__later-text {
+    font-size: 16px;
+    font-weight: 400;
+    max-width: 70%;
+    margin: 0 auto;
   }
 
   &__info {
@@ -130,6 +169,16 @@
     }
   }
 
+  &__bet-count {
+    &_up {
+      color: $color-green;
+    }
+
+    &_down {
+      color: $color-red;
+    }
+  }
+
   &__bet-info {
     font-size: 13px;
     font-weight: 600;
@@ -142,24 +191,31 @@
     font-weight: 600;
     line-height: 17.55px;
   }
+
+  &__noted {
+    height: 84px;
+    margin-top: 30px;
+    text-align: center;
+  }
+
+  &__noted-title {
+    @include font-generator("callout", 600);
+  }
+
+  &__noted-text {
+    margin-top: 4px;
+    @include font-generator("caption1", 400);
+  }
 }
 
 .mountedStyle {
-  // max-height: calc(100% - 24px);
-  // overflow: hidden;
   height: calc(100% - 24px);
   transition: all 0.4s ease-in-out;
-
   opacity: 1;
-  // transition: opacity 200ms ease-in;
 }
 
 .unmountedStyle {
-  // overflow: hidden;
   height: 0;
   opacity: 0;
   transition: all 0.4s ease-in-out;
-
-  // opacity: 0;
-  // transition: opacity 200ms ease-in;
 }

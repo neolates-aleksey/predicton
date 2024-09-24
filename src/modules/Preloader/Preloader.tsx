@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 import { authApi } from "../../api/authApi";
 import { useRecoilState } from "recoil";
 import { userState } from "../../store/userState";
@@ -10,7 +10,11 @@ import ServerError from "./ServerError/ServerError";
 const Preloader = () => {
   const [, setUserInfo] = useRecoilState(userState);
   const [launchInfo, setLaunchInfo] = useRecoilState(launchState);
-  const [errorType, setErrorType] = useState<"server" | "wrong_device" | null>(null);
+  const [errorType, setErrorType] = useState<"server" | "wrong_device" | null>(
+    null
+  );
+  const [fadeOut, setFadeOut] = useState<boolean | "loaded">(true);
+  const preloaderRef: any = useRef(null);
 
   useEffect(() => {
     setTimeout(() => {
@@ -19,15 +23,16 @@ const Preloader = () => {
       authApi
         .authMe()
         .then((res) => {
+          setFadeOut("loaded");
           setUserInfo(res.data);
-          setLaunchInfo({ isLoading: false });
         })
         .catch(() => {
           authApi
             .registerUser()
             .then((res) => {
+              setFadeOut("loaded");
               setUserInfo(res.data);
-              setLaunchInfo({ isLoading: false, isFirstLaunch: true });
+              setLaunchInfo({ isFirstLaunch: true });
             })
             .catch(() => {
               setErrorType("server");
@@ -37,10 +42,21 @@ const Preloader = () => {
     }, 1000);
   }, []);
 
+  useEffect(() => {
+    if (fadeOut === "loaded") {
+      preloaderRef.current.style.opacity = "0";
+      setFadeOut(false);
+
+      setTimeout(() => {
+        setLaunchInfo({ isLoading: false });
+      }, 500);
+    }
+  }, [fadeOut]);
+
   return (
     <>
       {launchInfo?.isLoading && (
-        <div className="preloader">
+        <div ref={preloaderRef} className="preloader">
           <div className="preloader__content">
             {!errorType && <IconLogo />}
             {errorType === "server" && <ServerError />}

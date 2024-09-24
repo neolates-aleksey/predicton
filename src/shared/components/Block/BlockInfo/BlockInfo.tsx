@@ -2,6 +2,7 @@ import classNames from "classnames";
 import "./BlockInfo.scss";
 import IconLock from "../../../icons/IconLock";
 import IconSafe from "../../../icons/IconSafe";
+import MotionNumber from "motion-number";
 
 interface IBlockInfo {
   last_price: number;
@@ -10,12 +11,24 @@ interface IBlockInfo {
   change: number;
 }
 
-const BlockInfo = ({ last_price, locked_price, prize_pool, change }: IBlockInfo) => {
+const BlockInfo = ({
+  last_price,
+  locked_price,
+  prize_pool,
+  change,
+}: IBlockInfo) => {
   return (
     <div className="block-info">
       <div className="block-info__item">
         <p className="block-info__title">Last price</p>
-        <p className="block-info__text">{last_price.toFixed(4)}</p>
+
+        <p className="block-info__text">
+          <MotionNumber
+            value={last_price}
+            format={{ notation: "standard", maximumSignificantDigits: 7 }}
+            locales="en-US"
+          />
+        </p>
       </div>
       <div
         className={classNames("block-info__item", "block-info__change", {
@@ -35,7 +48,8 @@ const BlockInfo = ({ last_price, locked_price, prize_pool, change }: IBlockInfo)
             "block-info__change-text_white": change < 0,
           })}
         >
-          {change.toFixed(5)}
+          {(last_price - locked_price).toFixed(5)}
+          {/* {change.toFixed(5)} */}
         </p>
       </div>
       <div className="block-info__item">
@@ -43,7 +57,9 @@ const BlockInfo = ({ last_price, locked_price, prize_pool, change }: IBlockInfo)
           <IconLock />
           Locked price
         </p>
-        <p className="block-info__text block-info__text_small">{locked_price && locked_price.toFixed(4)}</p>
+        <p className="block-info__text block-info__text_small">
+          {locked_price && locked_price.toFixed(4)}
+        </p>
       </div>
       <div className="block-info__item">
         <p className="block-info__title">

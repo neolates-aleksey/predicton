@@ -9,7 +9,7 @@ import Points from "./pages/Points/Points";
 import Account from "./pages/Account/Account";
 import Main from "./pages/Main/Main";
 import MobileNav from "./layouts/MobileNav/MobileNav";
-import Header from "./layouts/Header/Header";
+// import Header from "./layouts/Header/Header";
 import Preloader from "./modules/Preloader/Preloader";
 import "./shared/styles/index.scss";
 
@@ -35,7 +35,7 @@ function App() {
       <TonConnectUIProvider manifestUrl="http://localhost:5173/tonconnect-manifest.json">
         <BrowserRouter>
           <RecoilRoot>
-            <Header />
+            {/* <Header /> */}
             <MobileNav />
             <Preloader />
             <Routes>
