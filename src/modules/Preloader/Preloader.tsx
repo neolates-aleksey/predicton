@@ -6,6 +6,7 @@ import { launchState } from "../../store/launchState";
 import "./Preloader.scss";
 import IconLogo from "../../shared/icons/IconLogo";
 import ServerError from "./ServerError/ServerError";
+import { retrieveLaunchParams } from "@telegram-apps/sdk";
 
 const Preloader = () => {
   const [, setUserInfo] = useRecoilState(userState);
@@ -19,7 +20,7 @@ const Preloader = () => {
   useEffect(() => {
     setTimeout(() => {
       // DEV MODE
-      // setLaunchInfo({ isDevMode: false, isLoading: false });
+      // setLaunchInfo({ isDevMode: true, isLoading: true });
       authApi
         .authMe()
         .then((res) => {
@@ -27,8 +28,18 @@ const Preloader = () => {
           setUserInfo(res.data);
         })
         .catch(() => {
+          let launchParam;
+
+          try {
+            const params = retrieveLaunchParams();
+
+            launchParam = params.initData?.startParam;
+          } catch (e) {
+            console.log("not twa");
+          }
+
           authApi
-            .registerUser()
+            .registerUser(launchParam)
             .then((res) => {
               setFadeOut("loaded");
               setUserInfo(res.data);

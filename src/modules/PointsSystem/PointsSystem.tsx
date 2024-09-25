@@ -1,3 +1,4 @@
+import { useRecoilState } from "recoil";
 import Button from "../../shared/components/Button/Button";
 import RefLink from "../../shared/components/RefLink/RefLink";
 import Table from "../../shared/components/Table/Table";
@@ -7,10 +8,13 @@ import {
 } from "../../shared/consts/tablesData";
 import IconCoin from "../../shared/icons/IconCoin";
 import IconPerson from "../../shared/icons/IconPerson";
+import { userState } from "../../store/userState";
 import Tasks from "../Tasks/Tasks";
 import "./PointsSystem.scss";
 
 const PointsSystem = () => {
+  const [userInfo] = useRecoilState(userState);
+
   return (
     <div className="points-system">
       {/* <div className="points-system__block">
@@ -48,7 +52,7 @@ const PointsSystem = () => {
           You can invite new users and get points for it. Just send them your
           referral link:
         </p>
-        <RefLink link="predicton.xyz/ref/mLu52cmDv" />
+        <RefLink link={userInfo?.user.referal?.referal_link_code} />
         <p className="points-system__description">
           If a person who follows the referral link wins, you get % of his
           winning and points. The percent and points can increase

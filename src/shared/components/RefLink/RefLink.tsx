@@ -1,27 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import "./RefLink.scss";
 
+import { initUtils } from "@telegram-apps/sdk";
+
 interface IRefLink {
-  link: string;
+  link: string | undefined;
 }
 
 const RefLink = ({ link }: IRefLink) => {
-  const [isCopied, setCopied] = useState(false);
-
-  const onCopyClick = () => {
-    navigator.clipboard.writeText(link);
-    setCopied(true);
-
-    setTimeout(() => {
-      setCopied(false);
-    }, 4000);
-  };
+  // const utils = initUtils();
 
   return (
     <div className="ref-link">
-      <p className="ref-link__link">{link}</p>
-      <Button isDisabled={isCopied} onClick={onCopyClick} classname="ref-link__button" isPrimary isRounded text={isCopied ? "copied!" : "copy"} />
+      <p className="ref-link__link">
+        https://t.me/PredictonAppBot/Prediction/startapp={link}
+      </p>
+      <Button
+        // isDisabled={isCopied}
+        onClick={
+          () => console.log("deleete")
+
+          // utils.shareURL(
+          //   `https://t.me/PredictonAppBot/Prediction?startapp=${link}`
+          // )
+        }
+        classname="ref-link__button"
+        isPrimary
+        isRounded
+        text="share"
+      />
     </div>
   );
 };

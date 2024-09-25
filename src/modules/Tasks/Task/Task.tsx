@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classNames from "classnames";
 import IconArrowRight from "../../../shared/icons/IconArrowRight";
 import IconMarkDone from "../../../shared/icons/IconMarkDone";
@@ -6,6 +6,7 @@ import SmallLoader from "../../../shared/components/SmallLoader/SmallLoader";
 import Button from "../../../shared/components/Button/Button";
 import "./Task.scss";
 import { ITask, TaskKind, tasksApi, TaskState } from "../../../api/tasksApi";
+import IconTelegram from "../../../shared/icons/IconTelegram";
 
 interface ITaskProps {
   task: ITask;
@@ -19,10 +20,12 @@ const Task = ({ task }: ITaskProps) => {
       handleLinkClick();
   };
 
-  // const getIcon = (social?: string) => {
-  //   social === 'telegram' && return ''
-
-  // };
+  const getIcon = (social: string) => {
+    if (social === "telegram") {
+      return <IconTelegram />;
+    }
+    // social === 'telegram' &&
+  };
 
   const handleComplete = () => {
     tasksApi.completeTask(task.slug).then((res) => {
@@ -53,6 +56,12 @@ const Task = ({ task }: ITaskProps) => {
       });
   };
 
+  useEffect(() => {
+    if (checkTask === true && task.state === TaskState.DONE) {
+      setCheckTask(false);
+    }
+  }, [task]);
+
   return (
     <div className="task" onClick={() => missionCallback()}>
       <div className="task__content">
@@ -61,7 +70,11 @@ const Task = ({ task }: ITaskProps) => {
             task__icon_green: task.state === TaskState.DONE,
           })}
         >
-          {task.state === TaskState.DONE ? <IconMarkDone /> : "1"}
+          {task.state === TaskState.DONE ? (
+            <IconMarkDone />
+          ) : (
+            task.social && getIcon(task.social)
+          )}
         </div>
         <div className="task__description">
           <p className="task__title">{task.name}</p>
@@ -86,7 +99,6 @@ const Task = ({ task }: ITaskProps) => {
         {task.state === TaskState.READY_TO_CLAIM && (
           <Button
             isPrimary
-            isLoading
             isRounded
             onClick={() => handleClaim()}
             text="collect"

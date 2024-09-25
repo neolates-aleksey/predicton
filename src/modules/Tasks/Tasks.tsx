@@ -3,6 +3,9 @@ import { ITask, TaskKind, tasksApi, TaskState } from "../../api/tasksApi";
 import Task from "./Task/Task";
 import SmallLoader from "../../shared/components/SmallLoader/SmallLoader";
 import "./Tasks.scss";
+import { authApi } from "../../api/authApi";
+import { useRecoilState } from "recoil";
+import { userState } from "../../store/userState";
 
 const mockedTasks: ITask[] = [
   {
@@ -22,6 +25,7 @@ const mockedTasks: ITask[] = [
 
 const Tasks = () => {
   const [tasks, setTasks] = useState<ITask[] | false>(false);
+  const [, setUserInfo] = useRecoilState(userState);
 
   const updateTasks = () => {
     tasksApi
@@ -39,6 +43,10 @@ const Tasks = () => {
 
     const updateInterval = setInterval(() => {
       updateTasks();
+
+      authApi.authMe().then((res) => {
+        setUserInfo(res.data);
+      });
     }, 15000);
 
     return () => {

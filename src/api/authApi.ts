@@ -7,8 +7,11 @@ async function authMe() {
   return await api.get(`/auth/me`, {});
 }
 
-async function registerUser() {
-  return await api.post(`/auth/twa/sigin`, {});
+async function registerUser(referal_link?: string) {
+  return await api.post(
+    `/auth/twa/sigin${referal_link && `?referal_link=${referal_link}`}`,
+    {}
+  );
 }
 
 async function pointsClaim() {

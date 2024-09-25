@@ -24,6 +24,10 @@ export type UserState = {
       username?: string;
       language_code?: "ru" | "en";
     };
+    referal?: {
+      user_owner_id?: string;
+      referal_link_code: string;
+    };
   };
 };
 

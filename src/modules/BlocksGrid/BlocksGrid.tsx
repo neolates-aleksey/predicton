@@ -68,18 +68,6 @@ const BlocksGrid = () => {
       setBlocksData(block);
     };
 
-    socket.onopen = function (e) {
-      console.log(e);
-    };
-
-    socket.onclose = function (e) {
-      console.log(e);
-    };
-
-    socket.onclose = function (e) {
-      console.log(e);
-    };
-
     betsApi.myBets("point_block", 5).then((res) => {
       setBetsInfo(res.data);
     });

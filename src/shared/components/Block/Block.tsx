@@ -92,9 +92,10 @@ const Block = ({
   };
 
   useEffect(() => {
-    betsInfo?.forEach((bet) => {
-      bet.block_hash === block_hash && setBlockBet(bet);
-    });
+    betsInfo &&
+      betsInfo?.forEach((bet) => {
+        bet.block_hash === block_hash && setBlockBet(bet);
+      });
   }, [betsInfo]);
 
   return (

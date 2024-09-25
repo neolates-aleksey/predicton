@@ -17,7 +17,7 @@ interface IBlockBet {
 }
 
 const BlockBet = ({ closeHandler, side, className }: IBlockBet) => {
-  const [userInfo] = useRecoilState(userState);
+  const [userInfo, setUserInfo] = useRecoilState(userState);
   const [, setBetsInfo] = useRecoilState(userBets);
   const [betValue, setBetValue] = useState<number | null>(null);
 
@@ -41,6 +41,7 @@ const BlockBet = ({ closeHandler, side, className }: IBlockBet) => {
     betValue &&
       side &&
       betsApi.makeBet(betValue, side).then((res) => {
+        // TODO: записывать в стейт обновленный баланс
         console.log(res.data);
 
         betsApi.myBets("point_block", 5).then((res) => {
@@ -78,11 +79,20 @@ const BlockBet = ({ closeHandler, side, className }: IBlockBet) => {
         />
 
         {typeof userInfo?.user?.point_balance === "number" && (
-          <PercentTabs onTabChange={setBetValue} betValue={betValue} balance={userInfo?.user?.point_balance} />
+          <PercentTabs
+            onTabChange={setBetValue}
+            betValue={betValue}
+            balance={userInfo?.user?.point_balance}
+          />
         )}
       </div>
 
-      {typeof userInfo?.user?.point_balance === "number" && <Range onRangeChange={setBetValue} balance={userInfo?.user?.point_balance} />}
+      {typeof userInfo?.user?.point_balance === "number" && (
+        <Range
+          onRangeChange={setBetValue}
+          balance={userInfo?.user?.point_balance}
+        />
+      )}
 
       <Button
         onClick={() => handleMakeBet()}
@@ -90,10 +100,18 @@ const BlockBet = ({ closeHandler, side, className }: IBlockBet) => {
         isRounded
         isPrimary
         isDisabled={!betValue || betValue < 0.5}
-        text={typeof userInfo?.user?.point_balance === "number" && userInfo?.user?.point_balance === 0 ? "Not enought balance" : "Make a Prediction"}
+        text={
+          typeof userInfo?.user?.point_balance === "number" &&
+          userInfo?.user?.point_balance === 0
+            ? "Not enought balance"
+            : "Make a Prediction"
+        }
       />
 
-      <p className="block-bet__info">You won't be able to delete or change your position once you make a prediction</p>
+      <p className="block-bet__info">
+        You won't be able to delete or change your position once you make a
+        prediction
+      </p>
     </div>
   );
 };
