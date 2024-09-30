@@ -1,27 +1,11 @@
 import { useEffect, useState } from "react";
-import { ITask, TaskKind, tasksApi, TaskState } from "../../api/tasksApi";
-import Task from "./Task/Task";
-import SmallLoader from "../../shared/components/SmallLoader/SmallLoader";
-import "./Tasks.scss";
-import { authApi } from "../../api/authApi";
 import { useRecoilState } from "recoil";
+import { ITask, tasksApi } from "../../api/tasksApi";
+import { authApi } from "../../api/authApi";
 import { userState } from "../../store/userState";
-
-const mockedTasks: ITask[] = [
-  {
-    name: "Subscribe channel",
-    slug: "string1",
-    social: "telegram",
-    description: "",
-    link: "t.me/predicton",
-    points_reward: 100,
-    kind: TaskKind.TG_SUB,
-    state: TaskState.TODO,
-    created_at: 123,
-    completed_at: null,
-    user_id: "134",
-  },
-];
+import Task from "./Task/Task";
+import ContentLoader from "react-content-loader";
+import "./Tasks.scss";
 
 const Tasks = () => {
   const [tasks, setTasks] = useState<ITask[] | false>(false);
@@ -59,7 +43,31 @@ const Tasks = () => {
       {tasks ? (
         tasks.map((task) => <Task key={task.slug} task={task} />)
       ) : (
-        <SmallLoader />
+        <>
+          <ContentLoader
+            className="tasks__loader"
+            speed={2}
+            width={"100"}
+            height={"auto"}
+            viewBox="0 0 370 40"
+            backgroundColor="#20303F"
+            foregroundColor="#324353"
+          >
+            <rect x="0" y="0" rx="6" ry="6" width="100%" height="40" />
+          </ContentLoader>
+
+          <ContentLoader
+            className="tasks__loader"
+            speed={2}
+            width={"100"}
+            height={"auto"}
+            viewBox="0 0 370 40"
+            backgroundColor="#20303F"
+            foregroundColor="#324353"
+          >
+            <rect x="0" y="0" rx="6" ry="6" width="100%" height="40" />
+          </ContentLoader>
+        </>
       )}
     </div>
   );

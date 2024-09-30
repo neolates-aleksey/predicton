@@ -17,7 +17,7 @@ interface IBlockBet {
 }
 
 const BlockBet = ({ closeHandler, side, className }: IBlockBet) => {
-  const [userInfo, setUserInfo] = useRecoilState(userState);
+  const [userInfo] = useRecoilState(userState);
   const [, setBetsInfo] = useRecoilState(userBets);
   const [betValue, setBetValue] = useState<number | null>(null);
 

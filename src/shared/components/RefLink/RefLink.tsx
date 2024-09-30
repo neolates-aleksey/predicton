@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import "./RefLink.scss";
-
 import { initUtils } from "@telegram-apps/sdk";
 
 interface IRefLink {
@@ -9,7 +7,7 @@ interface IRefLink {
 }
 
 const RefLink = ({ link }: IRefLink) => {
-  // const utils = initUtils();
+  const utils = initUtils();
 
   return (
     <div className="ref-link">
@@ -17,13 +15,10 @@ const RefLink = ({ link }: IRefLink) => {
         https://t.me/PredictonAppBot/Prediction/startapp={link}
       </p>
       <Button
-        // isDisabled={isCopied}
-        onClick={
-          () => console.log("deleete")
-
-          // utils.shareURL(
-          //   `https://t.me/PredictonAppBot/Prediction?startapp=${link}`
-          // )
+        onClick={() =>
+          utils.shareURL(
+            `https://t.me/PredictonAppBot/Prediction?startapp=${link}`
+          )
         }
         classname="ref-link__button"
         isPrimary

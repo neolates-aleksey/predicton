@@ -62,7 +62,7 @@ const Main = () => {
                   locales="en-US"
                 />
               )}{" "}
-              POINTS
+              P.
             </p>
           </div>
         </div>

@@ -4,6 +4,20 @@
 .history {
   &__list {
     margin-top: 16px;
+    max-height: calc(100vh - 354px);
+    overflow: auto;
+  }
+
+  &__alert {
+    color: $color-gray;
+    font-size: 14px;
+    background-color: $color-dark-light;
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 280px;
+    margin: 0 auto;
+    margin-top: 20px;
+    text-align: center;
   }
 
   &__item {

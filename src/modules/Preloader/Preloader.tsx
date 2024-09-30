@@ -1,12 +1,12 @@
-import { RefObject, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { authApi } from "../../api/authApi";
 import { useRecoilState } from "recoil";
 import { userState } from "../../store/userState";
 import { launchState } from "../../store/launchState";
-import "./Preloader.scss";
 import IconLogo from "../../shared/icons/IconLogo";
 import ServerError from "./ServerError/ServerError";
 import { retrieveLaunchParams } from "@telegram-apps/sdk";
+import "./Preloader.scss";
 
 const Preloader = () => {
   const [, setUserInfo] = useRecoilState(userState);
@@ -32,8 +32,10 @@ const Preloader = () => {
 
           try {
             const params = retrieveLaunchParams();
+            console.log(params);
 
             launchParam = params.initData?.startParam;
+            console.log("launch param: ", launchParam);
           } catch (e) {
             console.log("not twa");
           }

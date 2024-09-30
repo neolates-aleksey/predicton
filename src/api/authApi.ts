@@ -9,8 +9,10 @@ async function authMe() {
 
 async function registerUser(referal_link?: string) {
   return await api.post(
-    `/auth/twa/sigin${referal_link && `?referal_link=${referal_link}`}`,
-    {}
+    !referal_link ? `/auth/twa/sigin` : `/auth/twa/sigin?${referal_link}`,
+    {
+      referal_link,
+    }
   );
 }
 
